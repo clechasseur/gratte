@@ -2,7 +2,7 @@
 
 use std::str::FromStr;
 use std::string::ToString;
-use strum::{EnumString, ToString};
+use gratte::{EnumString, ToString};
 
 mod core {} // ensure macros call `::core`
 

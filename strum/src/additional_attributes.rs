@@ -2,7 +2,7 @@
 //!
 //! ## Attributes on Enums
 //!
-//! Strum supports several custom attributes to modify the generated code. At the enum level, the following attributes are supported:
+//! `gratte` supports several custom attributes to modify the generated code. At the enum level, the following attributes are supported:
 //!
 //! - `#[strum(serialize_all = "case_style")]` attribute can be used to change the case used when serializing to and deserializing
 //!   from strings. This feature is enabled by [withoutboats/heck](https://github.com/withoutboats/heck) and supported case styles are:
@@ -20,9 +20,9 @@
 //!   - `Train-Case`
 //!
 //!   ```rust
-//!   use strum_macros;
+//!   use gratte;
 //!   
-//!   #[derive(Debug, Eq, PartialEq, strum_macros::Display)]
+//!   #[derive(Debug, Eq, PartialEq, gratte::Display)]
 //!   #[strum(serialize_all = "snake_case")]
 //!   enum Brightness {
 //!       DarkBlack,
@@ -61,13 +61,13 @@
 //!    this specifies what text to use when calling `variant.to_string()` with the `Display` derivation, or when calling `variant.as_ref()` with `AsRefStr`.
 //!
 //! - `default`: Applied to a single variant of an enum. The variant must be a Tuple-like
-//!    variant with a single piece of data that can be create from a `&str` i.e. `T: From<&str>`.
+//!    variant with a single piece of data that can be created from a `&str` i.e. `T: From<&str>`.
 //!    The generated code will now return the variant with the input string captured as shown below
 //!    instead of failing.
 //!
 //!     ```text
 //!     // Replaces this:
-//!     _ => Err(strum::ParseError::VariantNotFound)
+//!     _ => Err(gratte::ParseError::VariantNotFound)
 //!     // With this in generated code:
 //!     default => Ok(Variant(default.into()))
 //!     ```
@@ -82,7 +82,7 @@
 //!
 //! - `disabled`: removes variant from generated code.
 //!
-//! - `ascii_case_insensitive`: makes the comparison to this variant case insensitive (ASCII only).
+//! - `ascii_case_insensitive`: makes the comparison to this variant case-insensitive (ASCII only).
 //!   If the whole enum is marked `ascii_case_insensitive`, you can specify `ascii_case_insensitive = false`
 //!   to disable case insensitivity on this variant.
 //!

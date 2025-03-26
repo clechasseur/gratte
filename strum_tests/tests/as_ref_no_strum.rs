@@ -1,4 +1,4 @@
-use strum_macros::AsRefStr;
+use gratte_macros::AsRefStr;
 
 mod core {} // ensure macros call `::core`
 

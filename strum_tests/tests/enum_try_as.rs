@@ -1,4 +1,4 @@
-use strum::EnumTryAs;
+use gratte::EnumTryAs;
 
 #[derive(EnumTryAs)]
 enum Foo {

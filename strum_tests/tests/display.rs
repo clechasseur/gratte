@@ -1,8 +1,8 @@
-use strum::EnumString;
+use gratte::EnumString;
 
 mod core {} // ensure macros call `::core`
 
-#[derive(Debug, Eq, PartialEq, EnumString, strum::Display)]
+#[derive(Debug, Eq, PartialEq, EnumString, gratte::Display)]
 enum InnerColor {
     Violet,
     Fuchsia,
@@ -14,7 +14,7 @@ impl Default for InnerColor {
     }
 }
 
-#[derive(Debug, Eq, PartialEq, EnumString, strum::Display)]
+#[derive(Debug, Eq, PartialEq, EnumString, gratte::Display)]
 enum Color {
     #[strum(to_string = "RedRed")]
     Red,
@@ -96,7 +96,7 @@ fn to_violet_string() {
     );
 }
 
-#[derive(Debug, Eq, PartialEq, EnumString, strum::Display)]
+#[derive(Debug, Eq, PartialEq, EnumString, gratte::Display)]
 enum ColorWithDefaultAndToString {
     #[strum(default, to_string = "GreenGreen")]
     Green(String),
@@ -110,7 +110,7 @@ fn to_green_with_default_and_to_string() {
     );
 }
 
-#[derive(strum::Display, Debug, Eq, PartialEq)]
+#[derive(gratte::Display, Debug, Eq, PartialEq)]
 #[strum(serialize_all = "snake_case")]
 enum Brightness {
     DarkBlack,
@@ -137,7 +137,7 @@ fn brightness_to_string() {
     );
 }
 
-#[derive(strum::Display, Debug, Eq, PartialEq)]
+#[derive(gratte::Display, Debug, Eq, PartialEq)]
 #[strum(serialize_all = "snake_case")]
 enum NonStringDefault {
     #[strum(default)]
@@ -152,7 +152,7 @@ fn non_string_default_to_string() {
     );
 }
 
-#[derive(strum::Display, Debug, Eq, PartialEq)]
+#[derive(gratte::Display, Debug, Eq, PartialEq)]
 #[strum(serialize_all = "snake_case")]
 enum TransparentString {
     #[strum(transparent)]

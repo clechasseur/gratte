@@ -1,5 +1,5 @@
-use strum::{Display, EnumString};
-use strum_macros::AsRefStr;
+use gratte::{Display, EnumString};
+use gratte_macros::AsRefStr;
 
 #[allow(dead_code)]
 #[derive(Debug, EnumString, Display, AsRefStr)]
