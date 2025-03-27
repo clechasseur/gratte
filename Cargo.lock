@@ -95,18 +95,18 @@ dependencies = [
 
 [[package]]
 name = "clap"
-version = "4.5.32"
+version = "4.5.34"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "6088f3ae8c3608d19260cd7445411865a485688711b78b5be70d78cd96136f83"
+checksum = "e958897981290da2a852763fe9cdb89cd36977a5d729023127095fa94d95e2ff"
 dependencies = [
  "clap_builder",
 ]
 
 [[package]]
 name = "clap_builder"
-version = "4.5.32"
+version = "4.5.34"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "22a7ef7f676155edfb82daa97f99441f3ebf4a58d5e32f295a56259f1b6facc8"
+checksum = "83b0f35019843db2160b5bb19ae09b4e6411ac33fc6a712003c33e03090e2489"
 dependencies = [
  "anstream",
  "anstyle",
@@ -128,9 +128,9 @@ checksum = "5b63caa9aa9397e2d9480a9b13673856c78d8ac123288526c37d7839f2a86990"
 
 [[package]]
 name = "enum_variant_type"
-version = "0.3.1"
+version = "0.2.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "f7b4d0447be46f06039b1e13c5c77df8d9f9f37fa5fab578a1827b8f136aab64"
+checksum = "d1bd85a79872123319ccaa668d1d46912d61053e1a6deb7c2c1e392e034f5824"
 dependencies = [
  "proc-macro2",
  "proc_macro_roids",
@@ -171,7 +171,7 @@ dependencies = [
 name = "gratte_tests"
 version = "1.0.0"
 dependencies = [
- "clap 4.5.32",
+ "clap 4.5.34",
  "enum_variant_type",
  "gratte",
  "gratte_macros",

@@ -297,7 +297,7 @@ fn crate_module_path_test() {
     #[allow(dead_code)]
     #[derive(Debug, Eq, PartialEq, EnumDiscriminants)]
     #[strum_discriminants(derive(EnumIter))]
-    #[gratte(crate = "nested::module::gratte")]
+    #[strum(crate = "nested::module::gratte")]
     enum Simple {
         Variant0,
         Variant1,
