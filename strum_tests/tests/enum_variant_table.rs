@@ -1,4 +1,4 @@
-use strum::EnumTable;
+use gratte::EnumTable;
 
 #[derive(EnumTable)]
 #[allow(dead_code)]

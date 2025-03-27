@@ -49,7 +49,7 @@ pub fn enum_table_inner(ast: &DeriveInput) -> syn::Result<TokenStream> {
         if variant.get_variant_properties()?.disabled.is_some() {
             let disabled_ident = &variant.ident;
             let panic_message = format!(
-                "Can't use `{}` with `{}` - variant is disabled for Strum features",
+                "Can't use `{}` with `{}` - variant is disabled for gratte features",
                 disabled_ident, table_name
             );
             disabled_variants.push(disabled_ident);

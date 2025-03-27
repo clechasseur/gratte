@@ -1,4 +1,4 @@
-use strum::EnumProperty;
+use gratte::EnumProperty;
 
 mod core {} // ensure macros call `::core`
 
@@ -31,13 +31,13 @@ fn prop_test_not_found_2() {
 fn crate_module_path_test() {
     pub mod nested {
         pub mod module {
-            pub use strum;
+            pub use gratte;
         }
     }
 
     #[allow(dead_code)]
     #[derive(Debug, EnumProperty)]
-    #[strum(crate = "nested::module::strum")]
+    #[strum(crate = "nested::module::gratte")]
     enum Test {
         #[strum(props(key = "value"))]
         A,

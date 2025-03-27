@@ -1,12 +1,11 @@
-//! # Strum
+//! # `gratte` (a `strum` fork)
 //!
-//! Strum is a set of macros and traits for working with
-//! enums and strings easier in Rust.
+//! `gratte` is a fork of [`strum`](https://github.com/Peternator7/strum). It defines a set of
+//! macros and traits for working with enums and strings easier in Rust.
 //!
-//! This crate only contains derive macros for use with the
-//! [`strum`](https://docs.rs/strum)
-//! crate.  The macros provied by this crate are also available by
-//! enabling the `derive` feature in aforementioned `strum` crate.
+//! This crate only contains derive macros for use with the [`gratte`](https://docs.rs/gratte)
+//! crate. The macros provided by this crate are available by enabling the `derive` feature
+//! in the aforementioned `gratte` crate (which it is by default).
 
 #![recursion_limit = "128"]
 
@@ -35,7 +34,7 @@ fn debug_print_generated(ast: &DeriveInput, toks: &TokenStream) {
 /// Converts strings to enum variants based on their name.
 ///
 /// auto-derives `std::str::FromStr` on the enum (for Rust 1.34 and above, `std::convert::TryFrom<&str>`
-/// will be derived as well). Each variant of the enum will match on it's own name.
+/// will be derived as well). Each variant of the enum will match on its own name.
 /// This can be overridden using `serialize="DifferentName"` or `to_string="DifferentName"`
 /// on the attribute as shown below.
 /// Multiple deserializations can be added to the same variant. If the variant contains additional data,
@@ -48,22 +47,22 @@ fn debug_print_generated(ast: &DeriveInput, toks: &TokenStream) {
 /// variant. There is an option to match on different case conversions through the
 /// `#[strum(serialize_all = "snake_case")]` type attribute.
 ///
-/// See the [Additional Attributes](https://docs.rs/strum/latest/strum/additional_attributes/index.html)
+/// See the [Additional Attributes](https://docs.rs/gratte/latest/gratte/additional_attributes/index.html)
 /// Section for more information on using this feature.
 ///
 /// If you have a large enum, you may want to consider using the `use_phf` attribute here. It leverages
 /// perfect hash functions to parse much quicker than a standard `match`. (MSRV 1.46)
 ///
-/// The default error type is `strum::ParseError`. This can be overriden by applying both the
+/// The default error type is `gratte::ParseError`. This can be overridden by applying both the
 /// `parse_err_ty` and `parse_err_fn` attributes at the type level.  `parse_error_fn` should be a
 /// function that accepts an `&str` and returns the type `parse_error_ty`. See
-/// [this test case](https://github.com/Peternator7/strum/blob/9db3c4dc9b6f585aeb9f5f15f9cc18b6cf4fd780/strum_tests/tests/from_str.rs#L233)
+/// [this test case](https://github.com/clechasseur/gratte/blob/e382ddad5eab69b4a25042712347b07f12ab5a71/strum_tests/tests/from_str.rs#L245)
 /// for an example.
 ///
 /// # Example how to use `EnumString`
 /// ```
 /// use std::str::FromStr;
-/// use strum_macros::EnumString;
+/// use gratte::EnumString;
 ///
 /// #[derive(Debug, PartialEq, EnumString)]
 /// enum Color {
@@ -89,7 +88,7 @@ fn debug_print_generated(ast: &DeriveInput, toks: &TokenStream) {
 /// /*
 /// //The generated code will look like:
 /// impl std::str::FromStr for Color {
-///     type Err = ::strum::ParseError;
+///     type Err = ::gratte::ParseError;
 ///
 ///     fn from_str(s: &str) -> ::core::result::Result<Color, Self::Err> {
 ///         match s {
@@ -98,7 +97,7 @@ fn debug_print_generated(ast: &DeriveInput, toks: &TokenStream) {
 ///             "blue" => ::core::result::Result::Ok(Color::Blue(Default::default())),
 ///             "b" => ::core::result::Result::Ok(Color::Blue(Default::default())),
 ///             s if s.eq_ignore_ascii_case("Black") => ::core::result::Result::Ok(Color::Black),
-///             _ => ::core::result::Result::Err(::strum::ParseError::VariantNotFound),
+///             _ => ::core::result::Result::Err(::gratte::ParseError::VariantNotFound),
 ///         }
 ///     }
 /// }
@@ -135,12 +134,12 @@ pub fn from_string(input: proc_macro::TokenStream) -> proc_macro::TokenStream {
 /// a `&str` instead of a `String` so you don't allocate any additional memory with each call.
 ///
 /// If you require a `&'static str`, you can use
-/// [`strum::IntoStaticStr`](crate::IntoStaticStr) instead.
+/// [`gratte::IntoStaticStr`](IntoStaticStr) instead.
 ///
 /// ```
 /// // You need to bring the AsRef trait into scope to use it
 /// use std::convert::AsRef;
-/// use strum_macros::AsRefStr;
+/// use gratte::AsRefStr;
 ///
 /// #[derive(AsRefStr, Debug)]
 /// enum Color {
@@ -191,18 +190,18 @@ pub fn as_ref_str(input: proc_macro::TokenStream) -> proc_macro::TokenStream {
     toks.into()
 }
 
-/// Implements `Strum::VariantNames` which adds an associated constant `VARIANTS` which is a `'static` slice of discriminant names.
+/// Implements `gratte::VariantNames` which adds an associated constant `VARIANTS` which is a `'static` slice of discriminant names.
 ///
 /// Adds an `impl` block for the `enum` that adds a static `VARIANTS` array of `&'static str` that are the discriminant names.
 /// This will respect the `serialize_all` attribute on the `enum` (like `#[strum(serialize_all = "snake_case")]`.
 ///
 /// ```
 /// // import the macros needed
-/// use strum_macros::{EnumString};
+/// use gratte::EnumString;
 /// // You need to import the trait, to have access to VARIANTS
-/// use strum::VariantNames;
+/// use gratte::VariantNames;
 ///
-/// #[derive(Debug, EnumString, strum_macros::VariantNames)]
+/// #[derive(Debug, EnumString, gratte::VariantNames)]
 /// #[strum(serialize_all = "kebab-case")]
 /// enum Color {
 ///     Red,
@@ -237,17 +236,17 @@ pub fn variant_names_deprecated(input: proc_macro::TokenStream) -> proc_macro::T
     toks.into()
 }
 
-/// Adds a `'static` slice with all of the Enum's variants.
+/// Adds a `'static` slice with all the Enum's variants.
 ///
-/// Implements `strum::VariantArray` which adds an associated constant `VARIANTS`.
+/// Implements `gratte::VariantArray` which adds an associated constant `VARIANTS`.
 /// This constant contains an array with all the variants of the enumerator.
 ///
 /// This trait can only be autoderived if the enumerator is composed only of unit-type variants,
 /// meaning that the variants must not have any data.
 ///
 /// ```
-/// use strum::VariantArray as _;
-/// use strum_macros::VariantArray;
+/// use gratte::VariantArray as _;
+/// use gratte::VariantArray;
 ///
 /// #[derive(VariantArray, Debug, PartialEq, Eq)]
 /// enum Op {
@@ -294,7 +293,7 @@ pub fn as_static_str(input: proc_macro::TokenStream) -> proc_macro::TokenStream 
 /// The Rust `std` provides a blanket impl of the reverse direction - i.e. `impl Into<&'static str> for YourEnum`.
 ///
 /// ```
-/// use strum_macros::IntoStaticStr;
+/// use gratte::IntoStaticStr;
 ///
 /// #[derive(IntoStaticStr)]
 /// enum State<'a> {
@@ -334,9 +333,9 @@ pub fn into_static_str(input: proc_macro::TokenStream) -> proc_macro::TokenStrea
 /// ```
 /// // You need to bring the ToString trait into scope to use it
 /// use std::string::ToString;
-/// use strum_macros;
+/// use gratte;
 ///
-/// #[derive(strum_macros::ToString, Debug)]
+/// #[derive(gratte::ToString, Debug)]
 /// enum Color {
 ///     #[strum(serialize = "redred")]
 ///     Red,
@@ -356,7 +355,7 @@ pub fn into_static_str(input: proc_macro::TokenStream) -> proc_macro::TokenStrea
 /// ```
 #[deprecated(
     since = "0.22.0",
-    note = "please use `#[derive(Display)]` instead. See issue https://github.com/Peternator7/strum/issues/132"
+    note = "please use `#[derive(Display)]` instead. See issue https://github.com/Peternator7/gratte/issues/132"
 )]
 #[doc(hidden)]
 #[proc_macro_derive(ToString, attributes(strum))]
@@ -384,20 +383,20 @@ pub fn to_string(input: proc_macro::TokenStream) -> proc_macro::TokenStream {
 /// 5. Enums with fields support string interpolation.
 ///    Note this means the variant will not "round trip" if you then deserialize the string.
 ///
-///    ```rust
-///    #[derive(strum_macros::Display)]
-///    pub enum Color {
-///        #[strum(to_string = "saturation is {sat}")]
-///        Red { sat: usize },
-///        #[strum(to_string = "hue is {1}, saturation is {0}")]
-///        Blue(usize, usize),
-///    }
-///    ```
+/// ```rust
+/// #[derive(gratte::Display)]
+/// pub enum Color {
+///     #[strum(to_string = "saturation is {sat}")]
+///     Red { sat: usize },
+///     #[strum(to_string = "hue is {1}, saturation is {0}")]
+///     Blue(usize, usize),
+/// }
+/// ```
 ///
 /// ```
 /// // You need to bring the ToString trait into scope to use it
 /// use std::string::ToString;
-/// use strum_macros::Display;
+/// use gratte::Display;
 ///
 /// #[derive(Display, Debug)]
 /// enum Color {
@@ -445,15 +444,14 @@ pub fn display(input: proc_macro::TokenStream) -> proc_macro::TokenStream {
 /// Creates a new type that iterates over the variants of an enum.
 ///
 /// Iterate over the variants of an Enum. Any additional data on your variants will be set to `Default::default()`.
-/// The macro implements [`strum::IntoEnumIterator`](https://docs.rs/strum/latest/strum/trait.IntoEnumIterator.html) on your enum and creates a new type called `YourEnumIter` that is the iterator object.
+/// The macro implements [`gratte::IntoEnumIterator`](https://docs.rs/gratte/latest/gratte/trait.IntoEnumIterator.html) on your enum and creates a new type called `YourEnumIter` that is the iterator object.
 /// You cannot derive `EnumIter` on any type with a lifetime bound (`<'a>`) because the iterator would surely
 /// create [unbounded lifetimes](https://doc.rust-lang.org/nightly/nomicon/unbounded-lifetimes.html).
 ///
 /// ```
-///
 /// // You need to bring the trait into scope to use it!
-/// use strum::IntoEnumIterator;
-/// use strum_macros::EnumIter;
+/// use gratte::IntoEnumIterator;
+/// use gratte::EnumIter;
 ///
 /// #[derive(EnumIter, Debug, PartialEq)]
 /// enum Color {
@@ -489,8 +487,7 @@ pub fn enum_iter(input: proc_macro::TokenStream) -> proc_macro::TokenStream {
 /// E.g. `Color.is_red()`.
 ///
 /// ```
-///
-/// use strum_macros::EnumIs;
+/// use gratte::EnumIs;
 ///
 /// #[derive(EnumIs, Debug)]
 /// enum Color {
@@ -516,7 +513,7 @@ pub fn enum_is(input: proc_macro::TokenStream) -> proc_macro::TokenStream {
 /// These methods will only be generated for tuple-style variants, not for named or unit variants.
 ///
 /// ```
-/// use strum_macros::EnumTryAs;
+/// use gratte::EnumTryAs;
 ///
 /// #[derive(EnumTryAs, Debug)]
 /// enum Message {
@@ -564,8 +561,9 @@ pub fn enum_try_as(input: proc_macro::TokenStream) -> proc_macro::TokenStream {
 /// seems incomplete, and I reserve the right to deprecate it in the future if it becomes clear the design is flawed.
 ///
 /// # Example
+///
 /// ```rust
-/// use strum_macros::EnumTable;
+/// use gratte::EnumTable;
 ///
 /// #[derive(EnumTable)]
 /// enum Color {
@@ -618,8 +616,7 @@ pub fn enum_table(input: proc_macro::TokenStream) -> proc_macro::TokenStream {
 /// create [unbounded lifetimes](https://doc.rust-lang.org/nightly/nomicon/unbounded-lifetimes.html).
 ///
 /// ```
-///
-/// use strum_macros::FromRepr;
+/// use gratte::FromRepr;
 ///
 /// #[derive(FromRepr, Debug, PartialEq)]
 /// enum Color {
@@ -649,7 +646,7 @@ pub fn enum_table(input: proc_macro::TokenStream) -> proc_macro::TokenStream {
 /// On versions of rust >= 1.46, the `from_repr` function is marked `const`.
 ///
 /// ```rust
-/// use strum_macros::FromRepr;
+/// use gratte::FromRepr;
 ///
 /// #[derive(FromRepr, Debug, PartialEq)]
 /// #[repr(u8)]
@@ -685,9 +682,9 @@ pub fn from_repr(input: proc_macro::TokenStream) -> proc_macro::TokenStream {
 
 /// Add a verbose message to an enum variant.
 ///
-/// Encode strings into the enum itself. The `strum_macros::EmumMessage` macro implements the `strum::EnumMessage` trait.
+/// Encode strings into the enum itself. The `gratte::EmumMessage` macro implements the `gratte::EnumMessage` trait.
 /// `EnumMessage` looks for `#[strum(message="...")]` attributes on your variants.
-/// You can also provided a `detailed_message="..."` attribute to create a separate more detailed message than the first.
+/// You can also provide a `detailed_message="..."` attribute to create a separate more detailed message than the first.
 ///
 /// `EnumMessage` also exposes the variants doc comments through `get_documentation()`. This is useful in some scenarios,
 /// but `get_message` should generally be preferred. Rust doc comments are intended for developer facing documentation,
@@ -695,10 +692,10 @@ pub fn from_repr(input: proc_macro::TokenStream) -> proc_macro::TokenStream {
 ///
 /// ```
 /// // You need to bring the trait into scope to use it
-/// use strum::EnumMessage;
-/// use strum_macros;
+/// use gratte::EnumMessage;
+/// use gratte;
 ///
-/// #[derive(strum_macros::EnumMessage, Debug)]
+/// #[derive(gratte::EnumMessage, Debug)]
 /// #[allow(dead_code)]
 /// enum Color {
 ///     /// Danger color.
@@ -712,7 +709,7 @@ pub fn from_repr(input: proc_macro::TokenStream) -> proc_macro::TokenStream {
 ///
 /// // Generated code looks like more or less like this:
 /// /*
-/// impl ::strum::EnumMessage for Color {
+/// impl ::gratte::EnumMessage for Color {
 ///     fn get_message(&self) -> ::core::option::Option<&'static str> {
 ///         match self {
 ///             &Color::Red => ::core::option::Option::Some("Red"),
@@ -782,12 +779,11 @@ pub fn enum_messages(input: proc_macro::TokenStream) -> proc_macro::TokenStream 
 /// be the best choice in all situations.
 ///
 /// ```
-///
-/// use strum_macros;
+/// use gratte;
 /// // bring the trait into scope
-/// use strum::EnumProperty;
+/// use gratte::EnumProperty;
 ///
-/// #[derive(strum_macros::EnumProperty, Debug)]
+/// #[derive(gratte::EnumProperty, Debug)]
 /// #[allow(dead_code)]
 /// enum Color {
 ///     #[strum(props(Red = "255", Blue = "255", Green = "255"))]
@@ -812,7 +808,6 @@ pub fn enum_messages(input: proc_macro::TokenStream) -> proc_macro::TokenStream 
 /// );
 /// assert_eq!("My color is Red. It\'s RGB is 255,0,0", &display);
 /// ```
-
 #[proc_macro_derive(EnumProperty, attributes(strum))]
 pub fn enum_properties(input: proc_macro::TokenStream) -> proc_macro::TokenStream {
     let ast = syn::parse_macro_input!(input as DeriveInput);
@@ -843,8 +838,8 @@ pub fn enum_properties(input: proc_macro::TokenStream) -> proc_macro::TokenStrea
 /// ```
 /// // Bring trait into scope
 /// use std::str::FromStr;
-/// use strum::{IntoEnumIterator, EnumMessage as _};
-/// use strum_macros::{EnumDiscriminants, EnumIter, EnumString, EnumMessage};
+/// use gratte::{IntoEnumIterator, EnumMessage as _};
+/// use gratte::{EnumDiscriminants, EnumIter, EnumString};
 ///
 /// #[derive(Debug)]
 /// struct NonDefault;
@@ -852,7 +847,7 @@ pub fn enum_properties(input: proc_macro::TokenStream) -> proc_macro::TokenStrea
 /// // simple example
 /// # #[allow(dead_code)]
 /// #[derive(Debug, EnumDiscriminants)]
-/// #[strum_discriminants(derive(EnumString, EnumMessage))]
+/// #[strum_discriminants(derive(EnumString, gratte::EnumMessage))]
 /// #[strum_discriminants(doc = "This is the docstring on the generated type.")]
 /// enum MyEnum {
 ///     #[strum_discriminants(strum(message = "Variant zero"))]
@@ -904,11 +899,11 @@ pub fn enum_properties(input: proc_macro::TokenStream) -> proc_macro::TokenStrea
 /// visibility of the parent enum it was generated from.
 ///
 /// ```
-/// use strum_macros::EnumDiscriminants;
+/// use gratte::EnumDiscriminants;
 ///
 /// // You can set the visibility of the generated enum using the `#[strum_discriminants(vis(..))]` attribute:
 /// mod inner {
-///     use strum_macros::EnumDiscriminants;
+///     use gratte::EnumDiscriminants;
 ///
 ///     # #[allow(dead_code)]
 ///     #[derive(Debug, EnumDiscriminants)]
@@ -938,14 +933,14 @@ pub fn enum_discriminants(input: proc_macro::TokenStream) -> proc_macro::TokenSt
 
 /// Add a constant `usize` equal to the number of variants.
 ///
-/// For a given enum generates implementation of `strum::EnumCount`,
+/// For a given enum generates implementation of `gratte::EnumCount`,
 /// which adds a static property `COUNT` of type usize that holds the number of variants.
 ///
 /// ```
-/// use strum::{EnumCount, IntoEnumIterator};
-/// use strum_macros::{EnumCount as EnumCountMacro, EnumIter};
+/// use gratte::{EnumCount, IntoEnumIterator};
+/// use gratte::EnumIter;
 ///
-/// #[derive(Debug, EnumCountMacro, EnumIter)]
+/// #[derive(Debug, gratte::EnumCount, EnumIter)]
 /// enum Week {
 ///     Sunday,
 ///     Monday,

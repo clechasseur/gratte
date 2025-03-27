@@ -1,5 +1,5 @@
 use std::str::FromStr;
-use strum::EnumString;
+use gratte::EnumString;
 
 mod core {} // ensure macros call `::core`
 
@@ -28,7 +28,7 @@ enum Color {
     White(String),
 }
 
-#[derive(Debug, Eq, PartialEq, EnumString, strum::Display)]
+#[derive(Debug, Eq, PartialEq, EnumString, gratte::Display)]
 enum Color2 {
     #[strum(default)]
     Purple { inner: String }
@@ -124,7 +124,7 @@ enum Week {
 #[test]
 fn week_not_found() {
     assert_eq!(
-        Result::Err(::strum::ParseError::VariantNotFound),
+        Result::Err(::gratte::ParseError::VariantNotFound),
         Week::from_str("Humpday")
     );
 }

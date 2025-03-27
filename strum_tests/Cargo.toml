@@ -1,20 +1,22 @@
 [package]
-name = "strum_tests"
-version = "0.27.1"
+name = "gratte_tests"
+version.workspace = true
+authors.workspace = true
 edition = "2021"
-authors = ["Peter Glotfelty <peglotfe@microsoft.com>"]
 rust-version = "1.66.1"
+
+publish = false
 
 [features]
 default = []
-test_phf = ["strum/phf"]
+test_phf = ["gratte/phf"]
 
 [dependencies]
-strum = { path = "../strum", features = ["derive"] }
-strum_macros = { path = "../strum_macros", features = [] }
-clap = "=4.2.7"
-enum_variant_type = "=0.2.0"
-structopt = "=0.3.26"
+gratte = { workspace = true }
+gratte_macros = { workspace = true }
+clap = { workspace = true }
+enum_variant_type = { workspace = true }
+structopt = { workspace = true }
 
 [dev-dependencies]
-rustversion = "1.0"
+rustversion = { workspace = true }

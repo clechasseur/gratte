@@ -1,5 +1,5 @@
 use structopt::StructOpt;
-use strum::{EnumString, VariantNames};
+use gratte::{EnumString, VariantNames};
 
 mod core {} // ensure macros call `::core`
 
@@ -111,13 +111,13 @@ fn clap_and_structopt() {
 fn crate_module_path_test() {
     pub mod nested {
         pub mod module {
-            pub use strum;
+            pub use gratte;
         }
     }
 
     #[allow(dead_code)]
     #[derive(VariantNames)]
-    #[strum(crate = "nested::module::strum")]
+    #[strum(crate = "nested::module::gratte")]
     enum Color {
         Red,
         #[strum(serialize = "b")]

@@ -1,28 +1,59 @@
-//! # Strum
+//! # `gratte` (a `strum` fork)
 //!
-//! [![Build Status](https://travis-ci.org/Peternator7/strum.svg?branch=master)](https://travis-ci.org/Peternator7/strum)
-//! [![Latest Version](https://img.shields.io/crates/v/strum.svg)](https://crates.io/crates/strum)
-//! [![Rust Documentation](https://docs.rs/strum/badge.svg)](https://docs.rs/strum)
+//! `gratte` is a fork of [`strum`](https://github.com/Peternator7/strum). It defines a set of
+//! macros and traits for working with enums and strings easier in Rust.
 //!
-//! Strum is a set of macros and traits for working with
-//! enums and strings easier in Rust.
+//! The full version of the README can be found on [GitHub](https://github.com/clechasseur/gratte).
 //!
-//! The full version of the README can be found on [GitHub](https://github.com/Peternator7/strum).
+//! ## Installing
 //!
-//! # Including Strum in Your Project
-//!
-//! Import strum and `strum_macros` into your project by adding the following lines to your
-//! Cargo.toml. `strum_macros` contains the macros needed to derive all the traits in Strum.
+//! Add `gratte` to your dependencies:
 //!
 //! ```toml
 //! [dependencies]
-//! strum = "0.27"
-//! strum_macros = "0.27"
-//!
-//! # You can also access strum_macros exports directly through strum using the "derive" feature
-//! strum = { version = "0.27", features = ["derive"] }
+//! gratte = "1.0.0"
 //! ```
 //!
+//! or by running:
+//!
+//! ```bash
+//! cargo add gratte
+//! ```
+//!
+//! ## Usage
+//!
+//! `gratte` has the following `derive` macros:
+//!
+//! | Macro               | Description                                                                                              |
+//! |---------------------|----------------------------------------------------------------------------------------------------------|
+//! | [EnumString]        | Converts strings to enum variants based on their name.                                                   |
+//! | [Display]           | Converts enum variants to strings                                                                        |
+//! | [FromRepr]          | Convert from an integer to an enum.                                                                      |
+//! | [AsRefStr]          | Implement `AsRef<str>` for `MyEnum`                                                                      |
+//! | [IntoStaticStr]     | Implements `From<MyEnum> for &'static str` on an enum                                                    |
+//! | [EnumIter]          | Creates a new type that iterates the variants of an enum.                                                |
+//! | [EnumProperty]      | Add custom properties to enum variants.                                                                  |
+//! | [EnumMessage]       | Add a verbose message to enum variants.                                                                  |
+//! | [EnumDiscriminants] | Generate a new type with only the discriminant names.                                                    |
+//! | [EnumCount]         | Add a constant `usize` equal to the number of variants.                                                  |
+//! | [VariantArray]      | Adds an associated `VARIANTS` constant which is an array of all enum discriminants                       |
+//! | [VariantNames]      | Adds an associated `VARIANTS` constant which is an array of discriminant names                           |
+//! | [EnumTable]         | *Experimental*, creates a new type that stores an item of a specified type for each variant of the enum. |
+//!
+//! [EnumString]: https://docs.rs/gratte/latest/gratte/derive.EnumString.html
+//! [Display]: https://docs.rs/gratte/latest/gratte/derive.Display.html
+//! [AsRefStr]: https://docs.rs/gratte/latest/gratte/derive.AsRefStr.html
+//! [IntoStaticStr]: https://docs.rs/gratte/latest/gratte/derive.IntoStaticStr.html
+//! [EnumIter]: https://docs.rs/gratte/latest/gratte/derive.EnumIter.html
+//! [EnumIs]: https://docs.rs/gratte/latest/gratte/derive.EnumIs.html
+//! [EnumProperty]: https://docs.rs/gratte/latest/gratte/derive.EnumProperty.html
+//! [EnumMessage]: https://docs.rs/gratte/latest/gratte/derive.EnumMessage.html
+//! [EnumDiscriminants]: https://docs.rs/gratte/latest/gratte/derive.EnumDiscriminants.html
+//! [EnumCount]: https://docs.rs/gratte/latest/gratte/derive.EnumCount.html
+//! [FromRepr]: https://docs.rs/gratte/latest/gratte/derive.FromRepr.html
+//! [VariantArray]: https://docs.rs/gratte/latest/gratte/derive.VariantArray.html
+//! [VariantNames]: https://docs.rs/gratte/latest/gratte/derive.VariantNames.html
+//! [EnumTable]: https://docs.rs/gratte/latest/gratte/derive.EnumTable.html
 
 #![cfg_attr(not(feature = "std"), no_std)]
 #![cfg_attr(docsrs, feature(doc_cfg))]
@@ -74,7 +105,7 @@ impl std::error::Error for ParseError {
 /// ```rust
 /// # use std::fmt::Debug;
 /// // You need to bring the type into scope to use it!!!
-/// use strum::{EnumIter, IntoEnumIterator};
+/// use gratte::{EnumIter, IntoEnumIterator};
 ///
 /// #[derive(EnumIter, Debug)]
 /// enum Color {
@@ -129,7 +160,7 @@ pub trait VariantMetadata {
 /// ```rust
 /// # use std::fmt::Debug;
 /// // You need to bring the type into scope to use it!!!
-/// use strum::EnumMessage;
+/// use gratte::EnumMessage;
 ///
 /// #[derive(PartialEq, Eq, Debug, EnumMessage)]
 /// enum Pet {
@@ -155,7 +186,7 @@ pub trait EnumMessage {
 
 /// `EnumProperty` is a trait that makes it possible to store additional information
 /// with enum variants. This trait is designed to be used with the macro of the same
-/// name in the `strum_macros` crate. Currently, the string, integer and bool literals
+/// name in the `gratte_macros` crate. Currently, the string, integer and bool literals
 /// are supported in attributes.
 ///
 /// # Example
@@ -163,7 +194,7 @@ pub trait EnumMessage {
 /// ```rust
 /// # use std::fmt::Debug;
 /// // You need to bring the type into scope to use it!!!
-/// use strum::EnumProperty;
+/// use gratte::EnumProperty;
 ///
 /// #[derive(PartialEq, Eq, Debug, EnumProperty)]
 /// enum Class {
@@ -201,20 +232,20 @@ where
 }
 
 /// A trait for capturing the number of variants in Enum. This trait can be autoderived by
-/// `strum_macros`.
+/// `gratte_macros`.
 pub trait EnumCount {
     const COUNT: usize;
 }
 
 /// A trait for retrieving the names of each variant in Enum. This trait can
-/// be autoderived by `strum_macros`.
+/// be autoderived by `gratte_macros`.
 pub trait VariantNames {
     /// Names of the variants of this enum
     const VARIANTS: &'static [&'static str];
 }
 
 /// A trait for retrieving the enum generated by [`EnumDiscriminants`] from an associated
-/// Type on the original enumeration. This trait can be autoderived by `strum_macros`.
+/// Type on the original enumeration. This trait can be autoderived by `gratte_macros`.
 pub trait IntoDiscriminant {
     /// Enum listing the same variants as this enum but without any data fields
     type Discriminant;
@@ -223,7 +254,7 @@ pub trait IntoDiscriminant {
 }
 
 /// A trait for retrieving a static array containing all the variants in an Enum.
-/// This trait can be autoderived by `strum_macros`. For derived usage, all the
+/// This trait can be autoderived by `gratte_macros`. For derived usage, all the
 /// variants in the enumerator need to be unit-types, which means you can't autoderive
 /// enums with inner data in one or more variants. Consider using it alongside
 /// [`EnumDiscriminants`] if you require inner data but still want to have an
@@ -233,21 +264,21 @@ pub trait VariantArray: ::core::marker::Sized + 'static {
 }
 
 #[cfg(feature = "derive")]
-pub use strum_macros::*;
+pub use gratte_macros::*;
 
 macro_rules! DocumentMacroRexports {
     ($($export:ident),+) => {
         $(
             #[cfg(all(docsrs, feature = "derive"))]
             #[cfg_attr(docsrs, doc(cfg(feature = "derive")))]
-            pub use strum_macros::$export;
+            pub use gratte_macros::$export;
         )+
     };
 }
 
 // We actually only re-export these items individually if we're building
 // for docsrs. You can do a weird thing where you rename the macro
-// and then reference it through strum. The renaming feature should be deprecated now that
+// and then reference it through gratte. The renaming feature should be deprecated now that
 // 2018 edition is almost 2 years old, but we'll need to give people some time to do that.
 DocumentMacroRexports! {
     AsRefStr,

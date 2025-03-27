@@ -1,4 +1,4 @@
-use strum::{EnumDiscriminants, VariantArray};
+use gratte::{EnumDiscriminants, VariantArray};
 
 mod core {} // ensure macros call `::core`
 

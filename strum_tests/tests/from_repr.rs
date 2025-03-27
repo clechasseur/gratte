@@ -1,4 +1,4 @@
-use strum::FromRepr;
+use gratte::FromRepr;
 
 mod core {} // ensure macros call `::core`
 
@@ -45,12 +45,12 @@ fn crate_module_path_test() {
     pub mod nested {
         pub mod module {
             #[allow(unused_imports)]
-            pub use strum;
+            pub use gratte;
         }
     }
 
     #[derive(Debug, FromRepr, PartialEq)]
-    #[strum(crate = "nested::module::strum")]
+    #[strum(crate = "nested::module::gratte")]
     enum Week {
         Sunday,
         Monday,

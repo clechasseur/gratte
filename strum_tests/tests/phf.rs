@@ -3,7 +3,7 @@ mod core {} // ensure macros call `::core`
 #[cfg(feature = "test_phf")]
 #[test]
 fn from_str_with_phf() {
-    #[derive(Debug, PartialEq, Eq, Clone, strum::EnumString)]
+    #[derive(Debug, PartialEq, Eq, Clone, gratte::EnumString)]
     #[strum(use_phf)]
     enum Color {
         #[strum(ascii_case_insensitive)]
@@ -18,7 +18,7 @@ fn from_str_with_phf() {
 #[test]
 fn from_str_with_phf_big() {
     // This tests PHF when there are many case insensitive variants
-    #[derive(Debug, PartialEq, Eq, Clone, strum::EnumString)]
+    #[derive(Debug, PartialEq, Eq, Clone, gratte::EnumString)]
     #[strum(use_phf, ascii_case_insensitive)]
     enum Enum {
         Var1,

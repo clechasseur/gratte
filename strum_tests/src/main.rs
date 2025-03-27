@@ -1,5 +1,5 @@
-use strum::{Display, EnumCount, EnumDiscriminants, EnumString};
-use strum_macros::EnumIs;
+use gratte::{Display, EnumCount, EnumDiscriminants, EnumString};
+use gratte_macros::EnumIs;
 
 #[allow(dead_code)]
 #[derive(Debug, Eq, PartialEq, EnumString, Display, EnumCount, EnumDiscriminants, EnumIs)]

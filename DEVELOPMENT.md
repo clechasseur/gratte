@@ -4,12 +4,22 @@ This guide is meant for people wishing to contribute to this open-source project
 
 ### Rust
 
-You need at least **Rust 1.66.1** to build this project's code and run the tests. You can install Rust from the [official website](https://www.rust-lang.org/tools/install).
+You need at least **Rust 1.74.1** to build this project's code and run the tests. You can install Rust from the [official website](https://www.rust-lang.org/tools/install).
 If you already have a version of Rust installed via `rustup` but it's too old, you can update by running
 
 ```bash
 rustup update
 ```
+
+### Rust nightly
+
+Certain tools require a Nightly Rust toolset. If you do not have one installed, you can install one via `rustup` by running
+
+```bash
+rustup toolchain install nightly
+```
+
+If you already have one installed, but it was too old, it was probably updated earlier when you ran `rustup update` 😉
 
 ### Just
 
@@ -28,6 +38,7 @@ cargo binstall just
 ```
 
 You can also install it via various [methods](https://github.com/casey/just#packages).
+
 ## Development
 
 ### Running the tests
@@ -39,6 +50,16 @@ just test
 ```
 
 Any new feature or bug fix would need new tests to validate. Make sure all tests pass before submitting a PR.
+
+### Generating documentation
+
+To generate documentation locally, you can run
+
+```bash
+just doc
+```
+
+Make sure any new public symbol is documented before submitting a PR.
 
 ## Questions?
 

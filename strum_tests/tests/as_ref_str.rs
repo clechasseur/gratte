@@ -1,7 +1,7 @@
 #![allow(deprecated)]
 
 use std::str::FromStr;
-use strum::{AsRefStr, AsStaticRef, AsStaticStr, EnumString, IntoStaticStr};
+use gratte::{AsRefStr, AsStaticRef, AsStaticStr, EnumString, IntoStaticStr};
 
 mod core {} // ensure macros call `::core`
 

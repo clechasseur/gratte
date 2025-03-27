@@ -1,4 +1,4 @@
-use strum::{EnumIter, IntoEnumIterator};
+use gratte::{EnumIter, IntoEnumIterator};
 
 mod core {} // ensure macros call `::core`
 
@@ -182,12 +182,12 @@ fn take_nth_test() {
 fn crate_module_path_test() {
     pub mod nested {
         pub mod module {
-            pub use strum;
+            pub use gratte;
         }
     }
 
     #[derive(Debug, Eq, PartialEq, EnumIter)]
-    #[strum(crate = "nested::module::strum")]
+    #[strum(crate = "nested::module::gratte")]
     enum Week {
         Sunday,
         Monday,
