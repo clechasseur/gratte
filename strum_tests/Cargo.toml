@@ -12,8 +12,8 @@ default = []
 test_phf = ["gratte/phf"]
 
 [dependencies]
-gratte = { workspace = true }
-gratte_macros = { workspace = true }
+gratte = { path = "../strum" }
+gratte_macros = { path = "../strum_macros" }
 clap = { workspace = true }
 enum_variant_type = { workspace = true }
 structopt = { workspace = true }

@@ -34,4 +34,4 @@ rustversion = { workspace = true }
 syn = { workspace = true, features = ["parsing"] }
 
 [dev-dependencies]
-gratte = { workspace = true }
+gratte = { path = "../strum" }

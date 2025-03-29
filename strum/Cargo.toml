@@ -34,4 +34,4 @@ gratte_macros = { workspace = true, optional = true }
 phf = { workspace = true, optional = true, features = ["macros"] }
 
 [dev-dependencies]
-gratte_macros = { workspace = true }
+gratte_macros = { path = "../strum_macros" }

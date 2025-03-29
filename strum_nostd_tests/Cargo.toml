@@ -8,7 +8,7 @@ rust-version = "1.66.1"
 publish = false
 
 [dependencies]
-gratte = { workspace = true }
+gratte = { path = "../strum" }
 
 [dev-dependencies]
 rustversion = { workspace = true }
