@@ -128,9 +128,9 @@ checksum = "5b63caa9aa9397e2d9480a9b13673856c78d8ac123288526c37d7839f2a86990"
 
 [[package]]
 name = "enum_variant_type"
-version = "0.2.0"
+version = "0.3.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "d1bd85a79872123319ccaa668d1d46912d61053e1a6deb7c2c1e392e034f5824"
+checksum = "f7b4d0447be46f06039b1e13c5c77df8d9f9f37fa5fab578a1827b8f136aab64"
 dependencies = [
  "proc-macro2",
  "proc_macro_roids",
