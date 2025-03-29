@@ -1,4 +1,4 @@
-use strum::EnumMessage;
+use gratte::EnumMessage;
 
 mod core {} // ensure macros call `::core`
 
@@ -110,13 +110,13 @@ fn get_serializations() {
 fn crate_module_path_test() {
     pub mod nested {
         pub mod module {
-            pub use strum;
+            pub use gratte;
         }
     }
 
     #[allow(dead_code)]
     #[derive(Debug, Eq, PartialEq, EnumMessage)]
-    #[strum(crate = "nested::module::strum")]
+    #[strum(crate = "nested::module::gratte")]
     enum Pets {
         #[strum(message = "I'm a dog")]
         Dog,

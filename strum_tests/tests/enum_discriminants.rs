@@ -1,7 +1,7 @@
 use std::mem::{align_of, size_of};
 
 use enum_variant_type::EnumVariantType;
-use strum::{
+use gratte::{
     Display, EnumDiscriminants, EnumIter, EnumMessage, EnumString, FromRepr, IntoEnumIterator,
 };
 
@@ -290,14 +290,14 @@ fn override_visibility() {
 fn crate_module_path_test() {
     pub mod nested {
         pub mod module {
-            pub use strum;
+            pub use gratte;
         }
     }
 
     #[allow(dead_code)]
     #[derive(Debug, Eq, PartialEq, EnumDiscriminants)]
     #[strum_discriminants(derive(EnumIter))]
-    #[strum(crate = "nested::module::strum")]
+    #[strum(crate = "nested::module::gratte")]
     enum Simple {
         Variant0,
         Variant1,

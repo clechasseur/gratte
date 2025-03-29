@@ -1,35 +1,37 @@
 [package]
-name = "strum"
-version = "0.27.1"
+name = "gratte"
+version.workspace = true
+authors.workspace = true
 edition = "2021"
-authors = ["Peter Glotfelty <peter.glotfelty@microsoft.com>"]
-license = "MIT"
-
-description = "Helpful macros for working with enums and strings"
-keywords = ["enum", "string", "macros", "proc-macros"]
-categories = ["development-tools::procedural-macro-helpers", "parsing"]
-
-documentation = "https://docs.rs/strum"
-homepage = "https://github.com/Peternator7/strum"
-repository = "https://github.com/Peternator7/strum"
-readme = "../README.md"
 rust-version = "1.66.1"
 
-[dependencies]
-strum_macros = { path = "../strum_macros", optional = true, version = "0.27.1" }
-phf = { version = "0.11", features = ["macros"], optional = true }
+readme = "../README.md"
+license.workspace = true
 
-[dev-dependencies]
-strum_macros = { path = "../strum_macros" }
+homepage.workspace = true
+repository.workspace = true
+documentation = "https://docs.rs/gratte/"
 
-[badges]
-travis-ci = { repository = "Peternator7/strum" }
+description.workspace = true
 
-[features]
-default = ["std"]
-derive = ["strum_macros"]
-std = []
+keywords.workspace = true
+categories.workspace = true
 
 [package.metadata.docs.rs]
-features = ["derive"]
-rustdoc-args = ["--cfg", "docsrs"]
+all-features = true
+targets = [ "x86_64-unknown-linux-gnu" ]
+rustc-args = [ "--cfg", "docsrs" ]
+
+[features]
+default = ["std", "derive"]
+
+derive = ["dep:gratte_macros"]
+phf = ["dep:phf"]
+std = []
+
+[dependencies]
+gratte_macros = { workspace = true, optional = true }
+phf = { workspace = true, optional = true, features = ["macros"] }
+
+[dev-dependencies]
+gratte_macros = { workspace = true }

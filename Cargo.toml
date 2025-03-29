@@ -1,8 +1,35 @@
 [workspace]
+resolver = "2"
 members = [
     "strum",
     "strum_macros",
     "strum_tests",
     "strum_nostd_tests"
 ]
-resolver = "2"
+
+[workspace.package]
+version = "0.1.0"
+authors = [ "Charles Lechasseur <shiftingbeard@outlook.com>" ]
+
+license = "MIT"
+
+homepage = "https://github.com/clechasseur/gratte#readme"
+repository = "https://github.com/clechasseur/gratte"
+
+description = "Helpful macros for working with enums and strings; forked from gratte"
+
+keywords = [ "enum", "string", "macros", "proc-macros" ]
+categories = [ "development-tools::procedural-macro-helpers", "parsing" ]
+
+[workspace.dependencies]
+clap = "4.5.34"
+enum_variant_type = "=0.2.0"
+gratte = { path = "strum", version = "0.1.0" }
+gratte_macros = { path = "strum_macros", version = "0.1.0" }
+heck = "0.5.0"
+phf = "0.11.3"
+proc-macro2 = "1.0.94"
+quote = "1.0.40"
+rustversion = "1.0.20"
+structopt = "0.3.26"
+syn = "2.0.100"

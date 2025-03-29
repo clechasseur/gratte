@@ -1,12 +1,14 @@
 [package]
-name = "strum_nostd_tests"
-version = "0.27.1"
+name = "gratte_nostd_tests"
+version.workspace = true
+authors.workspace = true
 edition = "2021"
 rust-version = "1.66.1"
 
+publish = false
+
 [dependencies]
-strum = { path = "../strum", features = ["derive"] }
-strum_macros = { path = "../strum_macros", features = [] }
+gratte = { workspace = true }
 
 [dev-dependencies]
-rustversion = "1.0"
+rustversion = { workspace = true }

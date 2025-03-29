@@ -168,6 +168,6 @@ impl StrumTypeProperties {
     pub fn crate_module_path(&self) -> Path {
         self.crate_module_path
             .as_ref()
-            .map_or_else(|| parse_quote!(::strum), |path| parse_quote!(#path))
+            .map_or_else(|| parse_quote!(::gratte), |path| parse_quote!(#path))
     }
 }
