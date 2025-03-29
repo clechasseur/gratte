@@ -140,7 +140,7 @@ dependencies = [
 
 [[package]]
 name = "gratte"
-version = "1.0.0"
+version = "0.1.0"
 dependencies = [
  "gratte_macros",
  "phf",
@@ -148,7 +148,7 @@ dependencies = [
 
 [[package]]
 name = "gratte_macros"
-version = "1.0.0"
+version = "0.1.0"
 dependencies = [
  "gratte",
  "heck 0.5.0",
@@ -160,16 +160,15 @@ dependencies = [
 
 [[package]]
 name = "gratte_nostd_tests"
-version = "1.0.0"
+version = "0.1.0"
 dependencies = [
  "gratte",
- "gratte_macros",
  "rustversion",
 ]
 
 [[package]]
 name = "gratte_tests"
-version = "1.0.0"
+version = "0.1.0"
 dependencies = [
  "clap 4.5.34",
  "enum_variant_type",

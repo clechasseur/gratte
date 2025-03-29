@@ -11,7 +11,7 @@ Add `gratte` to your dependencies:
 
 ```toml
 [dependencies]
-gratte = "1.0.0"
+gratte = "0.1.0"
 ```
 
 or by running:
@@ -45,6 +45,11 @@ cargo add gratte
 To see the generated code, set the `STRUM_DEBUG` environment variable before compiling your code.
 `STRUM_DEBUG=1` will dump all the generated code for every type.
 `STRUM_DEBUG=YourType` will only dump the code generated on a type named `YourType`.
+
+## Differences from `strum`
+
+None yet.
+Stay tuned!
 
 ## Questions? Comments?
 

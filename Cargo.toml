@@ -8,7 +8,7 @@ members = [
 ]
 
 [workspace.package]
-version = "1.0.0"
+version = "0.1.0"
 authors = [ "Charles Lechasseur <shiftingbeard@outlook.com>" ]
 
 license = "MIT"
@@ -24,8 +24,8 @@ categories = [ "development-tools::procedural-macro-helpers", "parsing" ]
 [workspace.dependencies]
 clap = "4.5.34"
 enum_variant_type = "=0.2.0"
-gratte = { path = "strum", version = "1.0.0" }
-gratte_macros = { path = "strum_macros", version = "1.0.0" }
+gratte = { path = "strum", version = "0.1.0" }
+gratte_macros = { path = "strum_macros", version = "0.1.0" }
 heck = "0.5.0"
 phf = "0.11.3"
 proc-macro2 = "1.0.94"

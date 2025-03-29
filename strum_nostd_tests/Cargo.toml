@@ -9,7 +9,6 @@ publish = false
 
 [dependencies]
 gratte = { workspace = true }
-gratte_macros = { workspace = true }
 
 [dev-dependencies]
 rustversion = { workspace = true }
