@@ -1,6 +1,6 @@
 use proc_macro2::{Span, TokenStream, TokenTree};
 use quote::{quote, ToTokens};
-use syn::parse_quote;
+use syn::{parse_quote, LitStr};
 use syn::{Data, DeriveInput, Fields};
 
 use crate::helpers::{non_enum_error, strum_discriminants_passthrough_error, HasTypeProperties};
@@ -10,6 +10,11 @@ use crate::helpers::{non_enum_error, strum_discriminants_passthrough_error, HasT
 /// Attributes not in this list may be for other `proc_macro`s on the main enum, and may cause
 /// compilation problems when copied across.
 const ATTRIBUTES_TO_COPY: &[&str] = &["doc", "cfg", "allow", "deny", "strum_discriminants"];
+
+/// Default documentation applied to discriminant enums.
+///
+/// Can be overridden using `#[strum_discriminants(doc = "...")]`.
+const DEFAULT_DISCRIMINANT_ENUM_DOC: &str = "Auto-generated discriminant enum variants";
 
 pub fn enum_discriminants_inner(ast: &DeriveInput) -> syn::Result<TokenStream> {
     let name = &ast.ident;
@@ -31,7 +36,10 @@ pub fn enum_discriminants_inner(ast: &DeriveInput) -> syn::Result<TokenStream> {
     };
 
     // Create #[doc] attrs for new generated type.
-    let docs = type_properties.discriminant_docs;
+    let mut docs = type_properties.discriminant_docs;
+    if docs.is_empty() {
+        docs.push(LitStr::new(DEFAULT_DISCRIMINANT_ENUM_DOC, Span::call_site()));
+    }
 
     let docs = quote! {
         #(#[doc = #docs])*

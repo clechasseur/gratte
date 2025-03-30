@@ -363,3 +363,17 @@ fn with_explicit_discriminant_value() {
         WithExplicitDicriminantValueDiscriminants::Variant0 as u8
     );
 }
+
+/// CustomDoc doc here
+#[allow(dead_code)]
+#[derive(Debug, PartialEq, Eq, EnumDiscriminants)]
+#[strum_discriminants(doc = "CustomDoc discriminants doc here")]
+enum CustomDoc {
+    A,
+    B,
+}
+
+#[test]
+fn with_custom_doc() {
+    assert_ne!(CustomDocDiscriminants::A, CustomDocDiscriminants::B);
+}
