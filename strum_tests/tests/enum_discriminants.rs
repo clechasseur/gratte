@@ -4,6 +4,7 @@ use enum_variant_type::EnumVariantType;
 use gratte::{
     Display, EnumDiscriminants, EnumIter, EnumMessage, EnumString, FromRepr, IntoEnumIterator,
 };
+use gratte_tests::{Errors, ErrorsDiscriminants};
 
 mod core {} // ensure macros call `::core`
 
@@ -362,4 +363,15 @@ fn with_explicit_discriminant_value() {
         142,
         WithExplicitDicriminantValueDiscriminants::Variant0 as u8
     );
+}
+
+#[test]
+fn non_exhaustive_enum() {
+    let error = Errors::PathError("some_path".into());
+    let error_discriminant: ErrorsDiscriminants = error.into();
+    match error_discriminant {
+        ErrorsDiscriminants::NotFound => unreachable!(),
+        ErrorsDiscriminants::PathError => (),
+        _ => unreachable!(),
+    }
 }

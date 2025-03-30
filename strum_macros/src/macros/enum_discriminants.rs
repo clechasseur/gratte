@@ -31,10 +31,15 @@ pub fn enum_discriminants_inner(ast: &DeriveInput) -> syn::Result<TokenStream> {
     };
 
     // Create #[doc] attrs for new generated type.
-    let docs = type_properties.discriminant_docs;
+    let mut docs = type_properties.discriminant_docs;
+    if docs.is_empty() {
+        docs.push(quote! {
+            doc = "Auto-generated discriminant enum variants"
+        });
+    }
 
     let docs = quote! {
-        #(#[doc = #docs])*
+        #(#[ #docs ])*
     };
 
     // Work out the name

@@ -1,5 +1,5 @@
 use proc_macro2::TokenStream;
-use quote::quote;
+use quote::ToTokens;
 use std::default::Default;
 use syn::{parse_quote, DeriveInput, Ident, LitStr, Path, Visibility};
 
@@ -20,13 +20,13 @@ pub struct StrumTypeProperties {
     pub crate_module_path: Option<Path>,
     pub discriminant_derives: Vec<Path>,
     pub discriminant_name: Option<Ident>,
+    pub discriminant_docs: Vec<TokenStream>,
     pub discriminant_others: Vec<TokenStream>,
     pub discriminant_vis: Option<Visibility>,
     pub use_phf: bool,
     pub prefix: Option<LitStr>,
     pub enum_repr: Option<TokenStream>,
     pub const_into_str: bool,
-    pub discriminant_docs: Vec<LitStr>,
 }
 
 impl HasTypeProperties for DeriveInput {
@@ -140,11 +140,11 @@ impl HasTypeProperties for DeriveInput {
                     vis_kw = Some(kw);
                     output.discriminant_vis = Some(vis);
                 }
-                EnumDiscriminantsMeta::Doc { doc, .. } => {
-                    output.discriminant_docs.push(doc);
+                EnumDiscriminantsMeta::Doc { doc_meta } => {
+                    output.discriminant_docs.push(doc_meta.into_token_stream());
                 }
-                EnumDiscriminantsMeta::Other { path, nested } => {
-                    output.discriminant_others.push(quote! { #path(#nested) });
+                EnumDiscriminantsMeta::Other { passthrough_meta } => {
+                    output.discriminant_others.push(passthrough_meta.into_token_stream());
                 }
             }
         }
