@@ -1,7 +1,7 @@
 use proc_macro2::TokenStream;
 use quote::ToTokens;
 use std::default::Default;
-use syn::{parse_quote, DeriveInput, Ident, LitStr, Meta, Path, Visibility};
+use syn::{parse_quote, DeriveInput, Ident, LitStr, Path, Visibility};
 
 use super::case_style::CaseStyle;
 use super::metadata::{DeriveInputExt, EnumDiscriminantsMeta, EnumMeta};
@@ -26,7 +26,6 @@ pub struct StrumTypeProperties {
     pub use_phf: bool,
     pub prefix: Option<LitStr>,
     pub enum_repr: Option<TokenStream>,
-    pub non_exhaustive_enum: bool,
     pub const_into_str: bool,
 }
 
@@ -152,14 +151,12 @@ impl HasTypeProperties for DeriveInput {
 
         let attrs = &self.attrs;
         for attr in attrs {
-            match &attr.meta {
-                Meta::Path(path) if path.is_ident("non_exhaustive") => {
-                    output.non_exhaustive_enum = true;
-                },
-                Meta::List(list) if list.path.is_ident("repr") => {
-                    output.enum_repr = Some(list.tokens.clone());
-                },
-                _ => (),
+            if let Ok(list) = attr.meta.require_list() {
+                if let Some(ident) = list.path.get_ident() {
+                    if ident == "repr" {
+                        output.enum_repr = Some(list.tokens.clone())
+                    }
+                }
             }
         }
 

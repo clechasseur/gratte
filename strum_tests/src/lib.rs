@@ -45,6 +45,7 @@ pub enum Color {
 #[derive(Debug, Clone, PartialEq, Eq, EnumDiscriminants)]
 #[non_exhaustive]
 #[strum_discriminants(doc = "Discriminants-only version of a bunch of errors")]
+#[strum_discriminants(non_exhaustive)]
 pub enum Errors {
     NotFound,
     PathError(String),
