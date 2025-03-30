@@ -15,10 +15,36 @@ pub enum Color {
 }
 
 /// A bunch of errors
+///
+/// This will not work:
+///
+/// ```compile_fail
+/// # use gratte_tests::{Errors, ErrorsDiscriminants};
+/// fn expect_path_error(error: &Errors) {
+///     let discriminant: ErrorsDiscriminants = error.into();
+///     match discriminant {
+///         ErrorsDiscriminants::PathError => (),
+///         ErrorsDiscriminants::NotFound => panic!("should be a path error"),
+///     }
+/// }
+/// ```
+///
+/// This will work:
+///
+/// ```
+/// # use gratte_tests::{Errors, ErrorsDiscriminants};
+/// fn expect_path_error(error: &Errors) {
+///     let discriminant: ErrorsDiscriminants = error.into();
+///     match discriminant {
+///         ErrorsDiscriminants::PathError => (),
+///         ErrorsDiscriminants::NotFound => panic!("should be a path error"),
+///         _ => panic!("unknown error, should be a path error"),
+///     }
+/// }
+/// ```
 #[derive(Debug, Clone, PartialEq, Eq, EnumDiscriminants)]
 #[non_exhaustive]
 #[strum_discriminants(doc = "Discriminants-only version of a bunch of errors")]
-#[strum_discriminants(non_exhaustive)]
 pub enum Errors {
     NotFound,
     PathError(String),
