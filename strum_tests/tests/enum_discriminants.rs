@@ -4,6 +4,7 @@ use enum_variant_type::EnumVariantType;
 use gratte::{
     Display, EnumDiscriminants, EnumIter, EnumMessage, EnumString, FromRepr, IntoEnumIterator,
 };
+use gratte_tests::{Errors, ErrorsDiscriminants};
 
 mod core {} // ensure macros call `::core`
 
@@ -364,30 +365,13 @@ fn with_explicit_discriminant_value() {
     );
 }
 
-/// CustomDoc doc here
-#[allow(dead_code)]
-#[derive(Debug, PartialEq, Eq, EnumDiscriminants)]
-#[strum_discriminants(doc = "CustomDoc discriminants doc here")]
-enum CustomDoc {
-    A,
-    B,
-}
-
-#[test]
-fn with_custom_doc() {
-    assert_ne!(CustomDocDiscriminants::A, CustomDocDiscriminants::B);
-}
-
-#[allow(dead_code)]
-#[derive(Debug, EnumDiscriminants)]
-#[non_exhaustive]
-#[strum_discriminants(non_exhaustive)]
-enum NonExhaustive {
-    Error0,
-    Error1,
-}
-
 #[test]
 fn non_exhaustive_enum() {
-    assert_ne!(NonExhaustiveDiscriminants::Error0, NonExhaustiveDiscriminants::Error1);
+    let error = Errors::PathError("some_path".into());
+    let error_discriminant: ErrorsDiscriminants = error.into();
+    match error_discriminant {
+        ErrorsDiscriminants::NotFound => unreachable!(),
+        ErrorsDiscriminants::PathError => (),
+        _ => unreachable!(),
+    }
 }

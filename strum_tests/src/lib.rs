@@ -13,3 +13,13 @@ pub enum Color {
     #[strum(disabled)]
     Green(String),
 }
+
+/// A bunch of errors
+#[derive(Debug, Clone, PartialEq, Eq, EnumDiscriminants)]
+#[non_exhaustive]
+#[strum_discriminants(doc = "Discriminants-only version of a bunch of errors")]
+#[strum_discriminants(non_exhaustive)]
+pub enum Errors {
+    NotFound,
+    PathError(String),
+}

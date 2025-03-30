@@ -115,8 +115,8 @@ pub enum EnumDiscriminantsMeta {
     Derive { _kw: kw::derive, paths: Vec<Path> },
     Name { kw: kw::name, name: Ident },
     Vis { kw: kw::vis, vis: Visibility },
-    Doc { _kw: kw::doc, doc: LitStr },
-    Other { passthroughs_meta: Meta },
+    Doc { doc_meta: Meta },
+    Other { passthrough_meta: Meta },
 }
 
 impl Parse for EnumDiscriminantsMeta {
@@ -143,13 +143,11 @@ impl Parse for EnumDiscriminantsMeta {
             let vis = content.parse()?;
             Ok(EnumDiscriminantsMeta::Vis { kw, vis })
         } else if input.peek(kw::doc) {
-            let _kw = input.parse()?;
-            input.parse::<Token![=]>()?;
-            let doc = input.parse()?;
-            Ok(EnumDiscriminantsMeta::Doc { _kw, doc })
+            let doc_meta = input.parse()?;
+            Ok(EnumDiscriminantsMeta::Doc { doc_meta })
         } else {
-            let passthroughs_meta = input.parse()?;
-            Ok(EnumDiscriminantsMeta::Other { passthroughs_meta })
+            let passthrough_meta = input.parse()?;
+            Ok(EnumDiscriminantsMeta::Other { passthrough_meta })
         }
     }
 }
