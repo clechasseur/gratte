@@ -1,5 +1,5 @@
 use proc_macro2::TokenStream;
-use quote::quote;
+use quote::ToTokens;
 use std::default::Default;
 use syn::{parse_quote, DeriveInput, Ident, LitStr, Path, Visibility};
 
@@ -143,8 +143,8 @@ impl HasTypeProperties for DeriveInput {
                 EnumDiscriminantsMeta::Doc { doc, .. } => {
                     output.discriminant_docs.push(doc);
                 }
-                EnumDiscriminantsMeta::Other { path, nested } => {
-                    output.discriminant_others.push(quote! { #path(#nested) });
+                EnumDiscriminantsMeta::Other { passthroughs_meta } => {
+                    output.discriminant_others.push(passthroughs_meta.into_token_stream());
                 }
             }
         }

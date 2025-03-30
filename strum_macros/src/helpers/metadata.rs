@@ -1,4 +1,3 @@
-use proc_macro2::TokenStream;
 use syn::{
     parenthesized,
     parse::{Parse, ParseStream},
@@ -117,7 +116,7 @@ pub enum EnumDiscriminantsMeta {
     Name { kw: kw::name, name: Ident },
     Vis { kw: kw::vis, vis: Visibility },
     Doc { _kw: kw::doc, doc: LitStr },
-    Other { path: Path, nested: TokenStream },
+    Other { passthroughs_meta: Meta },
 }
 
 impl Parse for EnumDiscriminantsMeta {
@@ -149,11 +148,8 @@ impl Parse for EnumDiscriminantsMeta {
             let doc = input.parse()?;
             Ok(EnumDiscriminantsMeta::Doc { _kw, doc })
         } else {
-            let path = input.parse()?;
-            let content;
-            parenthesized!(content in input);
-            let nested = content.parse()?;
-            Ok(EnumDiscriminantsMeta::Other { path, nested })
+            let passthroughs_meta = input.parse()?;
+            Ok(EnumDiscriminantsMeta::Other { passthroughs_meta })
         }
     }
 }

@@ -377,3 +377,17 @@ enum CustomDoc {
 fn with_custom_doc() {
     assert_ne!(CustomDocDiscriminants::A, CustomDocDiscriminants::B);
 }
+
+#[allow(dead_code)]
+#[derive(Debug, EnumDiscriminants)]
+#[non_exhaustive]
+#[strum_discriminants(non_exhaustive)]
+enum NonExhaustive {
+    Error0,
+    Error1,
+}
+
+#[test]
+fn non_exhaustive_enum() {
+    assert_ne!(NonExhaustiveDiscriminants::Error0, NonExhaustiveDiscriminants::Error1);
+}
