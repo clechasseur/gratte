@@ -37,7 +37,7 @@ jobs:
           cache-on-failure: true
 
       - name: Install required tools
-        uses: taiki-e/install-action@dccf3df6e0d23d1cceb188bbc2255dd0799bcf48 # v2.49.8
+        uses: taiki-e/install-action@575f713d0233afba556737a7b85080563be14186 # v2.49.43
         with:
           tool: just,cargo-hack,cargo-minimal-versions,cargo-msrv-prep
         env:
@@ -88,7 +88,7 @@ jobs:
           cache-on-failure: true
 
       - name: Install required tools
-        uses: taiki-e/install-action@dccf3df6e0d23d1cceb188bbc2255dd0799bcf48 # v2.49.8
+        uses: taiki-e/install-action@575f713d0233afba556737a7b85080563be14186 # v2.49.43
         with:
           tool: just,cargo-hack
         env:
@@ -131,7 +131,7 @@ jobs:
           cache-on-failure: true
 
       - name: Install just
-        uses: taiki-e/install-action@dccf3df6e0d23d1cceb188bbc2255dd0799bcf48 # v2.49.8
+        uses: taiki-e/install-action@575f713d0233afba556737a7b85080563be14186 # v2.49.43
         with:
           tool: just
         env:
