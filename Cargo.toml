@@ -8,7 +8,7 @@ members = [
 ]
 
 [workspace.package]
-version = "1.0.0"
+version = "1.0.1"
 authors = [ "Charles Lechasseur <shiftingbeard@outlook.com>" ]
 
 license = "MIT"
@@ -16,7 +16,7 @@ license = "MIT"
 homepage = "https://github.com/clechasseur/gratte#readme"
 repository = "https://github.com/clechasseur/gratte"
 
-description = "Helpful macros for working with enums and strings; forked from gratte"
+description = "Helpful macros for working with enums and strings; forked from strum"
 
 keywords = [ "enum", "string", "macros", "proc-macros" ]
 categories = [ "development-tools::procedural-macro-helpers", "parsing" ]
@@ -24,7 +24,7 @@ categories = [ "development-tools::procedural-macro-helpers", "parsing" ]
 [workspace.dependencies]
 clap = "4.5.35"
 enum_variant_type = "=0.2.0"
-gratte_macros = { path = "strum_macros", version = "1.0.0" }
+gratte_macros = { path = "strum_macros", version = "1.0.1" }
 heck = "0.5.0"
 phf = "0.11.3"
 proc-macro2 = "1.0.94"

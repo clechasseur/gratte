@@ -11,7 +11,7 @@ Add `gratte` to your dependencies:
 
 ```toml
 [dependencies]
-gratte = "1.0.0"
+gratte = "1.0.1"
 ```
 
 or by running:
