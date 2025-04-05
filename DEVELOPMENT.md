@@ -28,7 +28,7 @@ If you already have one installed, but it was too old, it was probably updated e
 This project includes a [justfile](justfile) that makes it easier to run the various tools used for development. To install `just` via `cargo`, simply run
 
 ```bash
-cargo install just
+cargo install just --locked
 ```
 
 If you have [cargo-binstall](https://github.com/cargo-bins/cargo-binstall), it'll probably be faster to use it instead:
