@@ -3,6 +3,7 @@ use std::mem::{align_of, size_of};
 use enum_variant_type::EnumVariantType;
 use gratte::{
     Display, EnumDiscriminants, EnumIter, EnumMessage, EnumString, FromRepr, IntoEnumIterator,
+    VariantArray,
 };
 use gratte_tests::{Errors, ErrorsDiscriminants};
 
@@ -374,4 +375,17 @@ fn non_exhaustive_enum() {
         ErrorsDiscriminants::PathError => (),
         _ => unreachable!(),
     }
+}
+
+#[allow(dead_code)]
+#[derive(Debug, Eq, PartialEq, EnumIter, EnumDiscriminants)]
+#[strum_discriminants(derive(EnumIter, VariantArray))]
+enum Empty {}
+
+#[test]
+fn empty_test() {
+    let discriminants = Empty::iter().map(|i| i.into()).collect::<Vec<_>>();
+    let expected: Vec<_> = EmptyDiscriminants::VARIANTS.to_vec();
+
+    assert_eq!(expected, discriminants);
 }
