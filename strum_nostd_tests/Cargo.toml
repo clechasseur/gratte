@@ -7,6 +7,10 @@ rust-version = "1.66.1"
 
 publish = false
 
+[lints.rust.unexpected_cfgs]
+level = "warn"
+check-cfg = [ "cfg(tarpaulin)", "cfg(tarpaulin_include)", "cfg(coverage)", "cfg(coverage_nightly)" ]
+
 [dependencies]
 gratte = { path = "../strum" }
 

@@ -1,6 +1,9 @@
 #![no_std]
 
+#![cfg_attr(coverage_nightly, feature(coverage_attribute))]
+
 #[cfg(test)]
+#[cfg_attr(coverage_nightly, coverage(off))]
 mod tests {
     use core::str::FromStr;
     use gratte::EnumString;
