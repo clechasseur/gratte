@@ -7,6 +7,8 @@
 //! crate. The macros provided by this crate are available by enabling the `derive` feature
 //! in the aforementioned `gratte` crate (which it is by default).
 
+#![cfg_attr(coverage_nightly, feature(coverage_attribute))]
+
 #![recursion_limit = "128"]
 
 extern crate proc_macro;
