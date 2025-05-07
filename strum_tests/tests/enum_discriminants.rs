@@ -375,3 +375,16 @@ fn non_exhaustive_enum() {
         _ => unreachable!(),
     }
 }
+
+#[allow(dead_code)]
+#[derive(Debug, Eq, PartialEq, EnumDiscriminants)]
+#[strum_discriminants(derive(EnumIter))]
+enum Empty {}
+
+#[test]
+fn empty_test() {
+    let discriminants = EmptyDiscriminants::iter().collect::<Vec<EmptyDiscriminants>>();
+    let expected: Vec<EmptyDiscriminants> = vec![];
+
+    assert_eq!(expected, discriminants);
+}
