@@ -69,6 +69,7 @@ To see the generated code, set the `STRUM_DEBUG` environment variable before com
 * [EnumDiscriminants] now supports custom attributes on the discriminants enum in two new formats:
   * Path only (ex: `#[strum_discriminants(non_exhaustive)]`)
   * Name/value (ex: `#[strum_discriminants(doc = "foo")]`)
+* It is now possible to use [EnumDiscriminants] on empty enums.
 
 ## Questions? Comments?
 
