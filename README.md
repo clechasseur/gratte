@@ -5,6 +5,21 @@
 `gratte` is a fork of [`strum`](https://github.com/Peternator7/strum).
 It defines a set of macros and traits for working with enums and strings easier in Rust.
 
+## Should I use this?
+
+Good question.
+
+My motivation when creating this fork was to be able to add new features more quickly.
+It was also a good opportunity to learn more about proc macros in Rust.
+
+However, fragmentation can be dangerous.
+Ultimately, I would like for `gratte`'s new features to be backported to `strum`.
+I will try to create PRs for this to happen.
+However, I cannot guarantee that `strum`'s maintainer will accept them.
+
+Unless you have a specific need for something new in `gratte`, I would probably stick with `strum`.
+But if you need one of `gratte`'s new features, then by all means use this 🙂
+
 ## Installing
 
 Add `gratte` to your dependencies:
