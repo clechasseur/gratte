@@ -22,7 +22,7 @@ keywords = [ "enum", "string", "macros", "proc-macros" ]
 categories = [ "development-tools::procedural-macro-helpers", "parsing" ]
 
 [workspace.dependencies]
-clap = "4.5.38"
+clap = "4.5.39"
 enum_variant_type = "=0.2.0"
 gratte_macros = { path = "strum_macros", version = "1.1.0" }
 heck = "0.5.0"
