@@ -13,6 +13,3 @@ check-cfg = [ "cfg(tarpaulin)", "cfg(tarpaulin_include)", "cfg(coverage)", "cfg(
 
 [dependencies]
 gratte = { path = "../strum" }
-
-[dev-dependencies]
-rustversion = { workspace = true }

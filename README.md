@@ -53,7 +53,6 @@ cargo add gratte
 | [EnumCount]         | Add a constant `usize` equal to the number of variants.                                                  |
 | [VariantArray]      | Adds an associated `VARIANTS` constant which is an array of all enum discriminants                       |
 | [VariantNames]      | Adds an associated `VARIANTS` constant which is an array of discriminant names                           |
-| [EnumTable]         | *Experimental*, creates a new type that stores an item of a specified type for each variant of the enum. |
 
 ## Debugging
 
@@ -98,4 +97,3 @@ _gratte_ is the French translation of [_strum_](https://en.wikipedia.org/wiki/St
 [FromRepr]: https://docs.rs/gratte/latest/gratte/derive.FromRepr.html
 [VariantArray]: https://docs.rs/gratte/latest/gratte/derive.VariantArray.html
 [VariantNames]: https://docs.rs/gratte/latest/gratte/derive.VariantNames.html
-[EnumTable]: https://docs.rs/gratte/latest/gratte/derive.EnumTable.html
