@@ -103,7 +103,6 @@ pub fn from_repr_inner(ast: &DeriveInput) -> syn::Result<TokenStream> {
     Ok(quote! {
         #[automatically_derived]
         #[allow(clippy::use_self)]
-        #[automatically_derived]
         impl #impl_generics #name #ty_generics #where_clause {
             #[doc = "Try to create [Self] from the raw representation"]
             #[inline]
