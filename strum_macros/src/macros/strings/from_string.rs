@@ -172,7 +172,6 @@ pub fn from_string_inner(ast: &DeriveInput) -> syn::Result<TokenStream> {
     let from_str = quote! {
         #[automatically_derived]
         #[allow(clippy::use_self)]
-        #[automatically_derived]
         impl #impl_generics ::core::str::FromStr for #name #ty_generics #where_clause {
             type Err = #default_err_ty;
 
@@ -207,7 +206,6 @@ fn try_from_str(
     quote! {
         #[automatically_derived]
         #[allow(clippy::use_self)]
-        #[automatically_derived]
         impl #impl_generics ::core::convert::TryFrom<&str> for #name #ty_generics #where_clause {
             type Error = #default_err_ty;
 
