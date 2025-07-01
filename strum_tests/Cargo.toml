@@ -21,6 +21,3 @@ gratte_macros = { path = "../strum_macros" }
 clap = { workspace = true }
 enum_variant_type = { workspace = true }
 structopt = { workspace = true }
-
-[dev-dependencies]
-rustversion = { workspace = true }

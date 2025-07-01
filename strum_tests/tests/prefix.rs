@@ -1,5 +1,4 @@
-use gratte::{Display, EnumString};
-use gratte_macros::AsRefStr;
+use gratte::{AsRefStr, Display, EnumString};
 
 #[allow(dead_code)]
 #[derive(Debug, EnumString, Display, AsRefStr)]
@@ -19,4 +18,17 @@ enum Color {
 fn prefix_redred() {
     assert_eq!(String::from("colour/RedRed"), (Color::Red).to_string());
     assert_eq!(("colour/RedRed"), (Color::Red).as_ref());
+}
+
+#[test]
+fn prefix_green_default() {
+    assert_eq!(
+        String::from("green"),
+        (Color::Green("green".into())).to_string()
+    );
+
+    assert_eq!(
+        String::from("colour/Green"),
+        (Color::Green("green".into())).as_ref()
+    );
 }

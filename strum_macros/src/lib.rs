@@ -52,8 +52,11 @@ fn debug_print_generated(ast: &DeriveInput, toks: &TokenStream) {
 /// See the [Additional Attributes](https://docs.rs/gratte/latest/gratte/additional_attributes/index.html)
 /// Section for more information on using this feature.
 ///
-/// If you have a large enum, you may want to consider using the `use_phf` attribute here. It leverages
-/// perfect hash functions to parse much quicker than a standard `match`. (MSRV 1.46)
+/// If you have a large enum, you may want to consider using the `use_phf` attribute here.
+/// PHF (Perfect Hash Functions) use a hash lookup instead of a linear search that may perform faster 
+/// for large enums. Note: as with all optimizations, you should test this for your specific usecase
+/// rather than just assume it will be faster. With SIMD + pipelining, linear string search (aka memcmp)
+/// can be very fast for enums with a surprisingly large number of enum variants.
 ///
 /// The default error type is `gratte::ParseError`. This can be overridden by applying both the
 /// `parse_err_ty` and `parse_err_fn` attributes at the type level.  `parse_error_fn` should be a
@@ -181,6 +184,18 @@ pub fn from_string(input: proc_macro::TokenStream) -> proc_macro::TokenStream {
 ///
 /// assert_eq!("/redred", ColorWithPrefix::Red.as_ref());
 /// assert_eq!("/Green", ColorWithPrefix::Green.as_ref());
+///
+/// // With suffix on all variants
+/// #[derive(AsRefStr, Debug)]
+/// #[strum(suffix = ".rs")]
+/// enum ColorWithSuffix {
+///     #[strum(serialize = "redred")]
+///     Red,
+///     Green,
+/// }
+///
+/// assert_eq!("redred.rs", ColorWithSuffix::Red.as_ref());
+/// assert_eq!("Green.rs", ColorWithSuffix::Green.as_ref());
 /// ```
 #[proc_macro_derive(AsRefStr, attributes(strum))]
 pub fn as_ref_str(input: proc_macro::TokenStream) -> proc_macro::TokenStream {
@@ -382,7 +397,9 @@ pub fn to_string(input: proc_macro::TokenStream) -> proc_macro::TokenStream {
 /// 3. The name of the variant will be used if there are no `serialize` or `to_string` attributes.
 /// 4. If the enum has a `strum(prefix = "some_value_")`, every variant will have that prefix prepended
 ///    to the serialization.
-/// 5. Enums with fields support string interpolation.
+/// 5. If the enum has a `strum(suffix = "_another_value")`, every variant will have that suffix appended
+///    to the serialization.
+/// 6. Enums with fields support string interpolation.
 ///    Note this means the variant will not "round trip" if you then deserialize the string.
 ///
 /// ```rust
@@ -657,15 +674,10 @@ pub fn enum_table(input: proc_macro::TokenStream) -> proc_macro::TokenStream {
 ///     Three = 3,
 /// }
 ///
-/// # #[rustversion::since(1.46)]
 /// const fn number_from_repr(d: u8) -> Option<Number> {
 ///     Number::from_repr(d)
 /// }
 ///
-/// # #[rustversion::before(1.46)]
-/// # fn number_from_repr(d: u8) -> Option<Number> {
-/// #     Number::from_repr(d)
-/// # }
 /// assert_eq!(None, number_from_repr(0));
 /// assert_eq!(Some(Number::One), number_from_repr(1));
 /// assert_eq!(None, number_from_repr(2));

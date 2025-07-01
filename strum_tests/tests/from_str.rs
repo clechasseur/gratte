@@ -31,10 +31,9 @@ enum Color {
 #[derive(Debug, Eq, PartialEq, EnumString, gratte::Display)]
 enum Color2 {
     #[strum(default)]
-    Purple { inner: String }
+    Purple { inner: String },
 }
 
-#[rustversion::since(1.34)]
 fn assert_from_str<'a, T>(a: T, from: &'a str)
 where
     T: PartialEq + std::str::FromStr + std::convert::TryFrom<&'a str> + std::fmt::Debug,
@@ -43,15 +42,6 @@ where
 {
     assert_eq!(a, T::from_str(from).unwrap());
     assert_eq!(a, std::convert::TryFrom::try_from(from).unwrap());
-}
-
-#[rustversion::before(1.34)]
-fn assert_from_str<T>(a: T, from: &str)
-where
-    T: PartialEq + std::str::FromStr + std::fmt::Debug,
-    <T as std::str::FromStr>::Err: std::fmt::Debug,
-{
-    assert_eq!(a, T::from_str(from).unwrap());
 }
 
 #[test]
@@ -82,8 +72,19 @@ fn color_default() {
 
 #[test]
 fn color2_default() {
-    assert_from_str(Color2::Purple { inner: String::from("test") }, "test");
-    assert_eq!(String::from("test"), Color2::Purple { inner: String::from("test") }.to_string());
+    assert_from_str(
+        Color2::Purple {
+            inner: String::from("test"),
+        },
+        "test",
+    );
+    assert_eq!(
+        String::from("test"),
+        Color2::Purple {
+            inner: String::from("test")
+        }
+        .to_string()
+    );
 }
 
 #[test]
@@ -183,7 +184,6 @@ fn case_insensitive_enum_no_case_insensitive() {
     assert!(CaseInsensitiveEnum::from_str("nocaseinsensitive").is_err());
 }
 
-#[rustversion::since(1.34)]
 #[test]
 fn case_insensitive_enum_no_case_insensitive_try_from() {
     assert_from_str(CaseInsensitiveEnum::NoCaseInsensitive, "NoCaseInsensitive");
