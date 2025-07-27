@@ -3,7 +3,7 @@ name = "gratte"
 version.workspace = true
 authors.workspace = true
 edition = "2021"
-rust-version = "1.66.1"
+rust-version.workspace = true
 
 readme = "../README.md"
 license.workspace = true

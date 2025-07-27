@@ -3,7 +3,7 @@ name = "gratte_tests"
 version.workspace = true
 authors.workspace = true
 edition = "2021"
-rust-version = "1.66.1"
+rust-version.workspace = true
 
 publish = false
 
