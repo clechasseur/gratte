@@ -25,7 +25,7 @@ categories = [ "development-tools::procedural-macro-helpers", "parsing" ]
 [workspace.dependencies]
 gratte_macros = { path = "strum_macros", version = "1.2.0" }
 heck = "0.5.0"
-phf = "0.12.1"
+phf = "0.13.1"
 proc-macro2 = "1.0.101"
 quote = "1.0.40"
 syn = "2.0.106"
