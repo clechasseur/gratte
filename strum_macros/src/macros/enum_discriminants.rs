@@ -30,13 +30,6 @@ pub fn enum_discriminants_inner(ast: &DeriveInput) -> syn::Result<TokenStream> {
         #[derive(Clone, Copy, Debug, PartialEq, Eq, #(#derives),*)]
     };
 
-    // Create #[doc] attrs for new generated type.
-    let docs = type_properties.discriminant_docs;
-
-    let docs = quote! {
-        #(#[doc = #docs])*
-    };
-
     // Work out the name
     let default_name = syn::Ident::new(&format!("{}Discriminants", name), Span::call_site());
 
@@ -46,8 +39,20 @@ pub fn enum_discriminants_inner(ast: &DeriveInput) -> syn::Result<TokenStream> {
         .as_ref()
         .unwrap_or_else(|| &vis);
 
-    // Pass through all other attributes
-    let pass_though_attributes = type_properties.discriminant_others;
+    // Pass through all other attributes and add doc if there is none
+    let pass_through_attributes = type_properties.discriminant_others;
+    let has_doc = pass_through_attributes
+        .iter()
+        .any(|meta| meta.path().is_ident("doc"));
+    let mut pass_through_attributes: Vec<_> = pass_through_attributes
+        .into_iter()
+        .map(ToTokens::into_token_stream)
+        .collect();
+    if !has_doc {
+        pass_through_attributes.push(quote! {
+            doc = "Auto-generated discriminant enum variants"
+        });
+    }
 
     let repr = type_properties.enum_repr.map(|repr| quote!(#[repr(#repr)]));
 
@@ -196,10 +201,9 @@ pub fn enum_discriminants_inner(ast: &DeriveInput) -> syn::Result<TokenStream> {
     };
 
     Ok(quote! {
-        #docs
         #derives
         #repr
-        #(#[ #pass_though_attributes ])*
+        #(#[ #pass_through_attributes ])*
         #discriminants_vis enum #discriminants_name {
             #(#discriminants),*
         }
