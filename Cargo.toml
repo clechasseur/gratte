@@ -28,7 +28,7 @@ heck = "0.5.0"
 phf = "0.13.1"
 proc-macro2 = "1.0.103"
 quote = "1.0.41"
-syn = "2.0.106"
+syn = "2.0.111"
 
 # Dev dependencies:
 clap = "4.5.53"
