@@ -32,5 +32,5 @@ syn = "2.0.106"
 
 # Dev dependencies:
 clap = "4.5.57"
-enum_variant_type = "=0.2.0"
+enum_variant_type = "=0.4.0"
 structopt = "0.3.26"
