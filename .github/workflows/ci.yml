@@ -18,7 +18,7 @@ jobs:
       fail-fast: false
       matrix:
         package: [ "gratte", "gratte_macros" ]
-        os: [ ubuntu-24.04, macos-14, windows-2022 ]
+        os: [ ubuntu-24.04, macos-15, windows-2025 ]
         include:
           - toolchain: 1.71.1
     runs-on: ${{ matrix.os }}
@@ -42,7 +42,7 @@ jobs:
       - name: Install required tools
         uses: taiki-e/install-action@385db9cc6bf65d19775b02084a4b698eaca9a4f2 # v2.68.19
         with:
-          tool: just@1.40.0,cargo-hack@0.6.36,cargo-minimal-versions@0.1.30,cargo-msrv-prep@2.1.1
+          tool: just@1.46.0,cargo-hack@0.6.43,cargo-minimal-versions@0.1.36,cargo-msrv-prep@2.1.1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
@@ -54,7 +54,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        os: [ ubuntu-24.04, macos-14, windows-2022 ]
+        os: [ ubuntu-24.04, macos-15, windows-2025 ]
     runs-on: ${{ matrix.os }}
     steps:
       - name: Checkout code
@@ -75,7 +75,7 @@ jobs:
       - name: Install required tools
         uses: taiki-e/install-action@385db9cc6bf65d19775b02084a4b698eaca9a4f2 # v2.68.19
         with:
-          tool: just@1.40.0,cargo-hack@0.6.36
+          tool: just@1.46.0,cargo-hack@0.6.43
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
@@ -101,7 +101,7 @@ jobs:
       - name: Install just
         uses: taiki-e/install-action@385db9cc6bf65d19775b02084a4b698eaca9a4f2 # v2.68.19
         with:
-          tool: just@1.40.0
+          tool: just@1.46.0
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
