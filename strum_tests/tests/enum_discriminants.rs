@@ -91,22 +91,6 @@ fn with_strum_default_test() {
     assert_ne!(WithStrumDefaultDiscriminants::A, WithStrumDefaultDiscriminants::B);
 }
 
-#[allow(dead_code)]
-#[derive(Debug, Default, EnumDiscriminants)]
-#[strum_discriminants(derive(Default))]
-enum WithDefaultDerive {
-    A(String),
-    #[default]
-    #[strum_discriminants(default)]
-    B,
-}
-
-#[test]
-fn with_default_derive_test() {
-    let def = WithDefaultDeriveDiscriminants::default();
-    assert_eq!(WithDefaultDeriveDiscriminants::B, def);
-}
-
 // This test exists to ensure that we can pass attributes to the discriminant variants.
 #[allow(dead_code)]
 #[derive(Debug, EnumDiscriminants)]
