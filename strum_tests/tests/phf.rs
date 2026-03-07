@@ -17,7 +17,7 @@ fn from_str_with_phf() {
 #[cfg(feature = "test_phf")]
 #[test]
 fn from_str_with_phf_infallible() {
-    #[derive(Debug, PartialEq, Eq, Clone, strum::EnumString)]
+    #[derive(Debug, PartialEq, Eq, Clone, gratte::EnumString)]
     #[strum(use_phf)]
     enum Color {
         Red,
@@ -40,7 +40,7 @@ fn from_str_with_phf_infallible() {
 #[cfg(feature = "test_phf")]
 #[test]
 fn from_str_with_phf_infallible_case_insensitive() {
-    #[derive(Debug, PartialEq, Eq, Clone, strum::EnumString)]
+    #[derive(Debug, PartialEq, Eq, Clone, gratte::EnumString)]
     #[strum(use_phf)]
     enum Color {
         #[strum(ascii_case_insensitive)]
