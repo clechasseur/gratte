@@ -20,7 +20,7 @@ jobs:
         package: [ "gratte", "gratte_macros" ]
         os: [ ubuntu-24.04, macos-14, windows-2022 ]
         include:
-          - toolchain: 1.66.1
+          - toolchain: 1.71.1
     runs-on: ${{ matrix.os }}
     steps:
       - name: Checkout code

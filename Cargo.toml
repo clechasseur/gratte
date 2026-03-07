@@ -10,7 +10,7 @@ members = [
 [workspace.package]
 version = "1.2.0"
 authors = [ "Charles Lechasseur <shiftingbeard@outlook.com>" ]
-rust-version = "1.66.1"
+rust-version = "1.71.1"
 
 license = "MIT"
 
@@ -26,9 +26,9 @@ categories = [ "development-tools::procedural-macro-helpers", "parsing" ]
 gratte_macros = { path = "strum_macros", version = "1.2.0" }
 heck = "0.5.0"
 phf = "0.13.1"
-proc-macro2 = "1.0.103"
-quote = "1.0.41"
-syn = "2.0.106"
+proc-macro2 = "1.0.106"
+quote = "1.0.45"
+syn = "2.0.117"
 
 # Dev dependencies:
 clap = "4.5.60"
