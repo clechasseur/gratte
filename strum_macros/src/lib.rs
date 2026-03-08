@@ -8,7 +8,6 @@
 //! in the aforementioned `gratte` crate (which it is by default).
 
 #![cfg_attr(coverage_nightly, feature(coverage_attribute))]
-
 #![recursion_limit = "128"]
 
 extern crate proc_macro;

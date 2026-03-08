@@ -1,7 +1,7 @@
 #![allow(clippy::infallible_try_from)]
 
-use std::{convert::Infallible, str::FromStr};
 use gratte::EnumString;
+use std::{convert::Infallible, str::FromStr};
 
 mod core {} // ensure macros call `::core`
 

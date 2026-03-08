@@ -1,9 +1,9 @@
 #![allow(deprecated)]
 #![allow(clippy::to_string_trait_impl)]
 
+use gratte::{EnumString, ToString};
 use std::str::FromStr;
 use std::string::ToString;
-use gratte::{EnumString, ToString};
 
 mod core {} // ensure macros call `::core`
 

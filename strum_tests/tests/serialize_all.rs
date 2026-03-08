@@ -1,7 +1,7 @@
+use gratte::{Display, EnumString, IntoStaticStr};
 /// test `serialize_all` cooperation with other macroses
 use std::str::FromStr;
 use std::string::ToString;
-use gratte::{Display, EnumString, IntoStaticStr};
 
 mod core {} // ensure macros call `::core`
 

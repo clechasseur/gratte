@@ -88,7 +88,10 @@ enum WithStrumDefault {
 
 #[test]
 fn with_strum_default_test() {
-    assert_ne!(WithStrumDefaultDiscriminants::A, WithStrumDefaultDiscriminants::B);
+    assert_ne!(
+        WithStrumDefaultDiscriminants::A,
+        WithStrumDefaultDiscriminants::B
+    );
 }
 
 // This test exists to ensure that we can pass attributes to the discriminant variants.
