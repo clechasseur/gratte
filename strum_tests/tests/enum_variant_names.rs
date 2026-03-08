@@ -1,5 +1,5 @@
-use structopt::StructOpt;
 use gratte::{EnumString, VariantNames};
+use structopt::StructOpt;
 
 mod core {} // ensure macros call `::core`
 

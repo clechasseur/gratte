@@ -1,5 +1,5 @@
-use std::borrow::Cow;
 use gratte::EnumIs;
+use std::borrow::Cow;
 
 mod core {} // ensure macros call `::core`
 #[derive(EnumIs)]
