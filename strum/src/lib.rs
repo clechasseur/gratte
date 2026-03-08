@@ -11,7 +11,7 @@
 //!
 //! ```toml
 //! [dependencies]
-//! gratte = "1.1.0"
+//! gratte = "2.0.0"
 //! ```
 //!
 //! or by running:
