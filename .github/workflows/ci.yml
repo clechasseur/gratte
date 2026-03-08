@@ -12,6 +12,52 @@ env:
   CI: 1
 
 jobs:
+  clippy:
+    name: Clippy validation
+    runs-on: ubuntu-24.04
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+
+      - name: Install Rust with clippy
+        uses: actions-rust-lang/setup-rust-toolchain@a0b538fa0b742a6aa35d6e2c169b4bd06d225a98 # v1.15.3
+        with:
+          toolchain: stable
+          components: clippy
+          cache: false
+
+      - name: Rust Cache
+        uses: Swatinem/rust-cache@779680da715d629ac1d338a641029a2f4372abb5 # v2.8.2
+        with:
+          prefix-key: v2-rust
+          cache-on-failure: true
+
+      - name: Run clippy
+        uses: clechasseur/rs-clippy-check@286fd9545eb133adad54b4af34bcb642e266ddd1 # v5.0.2
+        with:
+          args: --workspace --all-targets --feature-powerset -- -D warnings
+          tool: cargo-hack
+          cache-key: v1-clippy
+
+  fmt:
+    name: Rustfmt check
+    runs-on: ubuntu-24.04
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+
+      - name: Install Rust nightly with rustfmt
+        uses: actions-rust-lang/setup-rust-toolchain@a0b538fa0b742a6aa35d6e2c169b4bd06d225a98 # v1.15.3
+        with:
+          toolchain: nightly
+          components: rustfmt
+          cache: false
+
+      - name: Run Rustfmt
+        uses: clechasseur/rs-fmt-check@75c30e8e2958c645c6aad4b078f0ad3ce2997d9d # v3.0.1
+        with:
+          args: --all
+
   msrv-check:
     name: MSRV check of ${{ matrix.package }} on ${{ matrix.os }}
     strategy:
