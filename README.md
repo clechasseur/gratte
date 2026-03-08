@@ -26,7 +26,7 @@ Add `gratte` to your dependencies:
 
 ```toml
 [dependencies]
-gratte = "1.1.0"
+gratte = "2.0.0"
 ```
 
 or by running:
@@ -76,7 +76,7 @@ For instructions on filing bug reports or feature requests and contributing to t
 
 ## Minimum Rust version
 
-`gratte` currently builds on Rust 1.66.1 or newer.
+`gratte` currently builds on Rust 1.71.1 or newer.
 
 ## `gratte`?
 

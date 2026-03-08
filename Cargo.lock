@@ -146,7 +146,7 @@ checksum = "37909eebbb50d72f9059c3b6d82c0463f2ff062c9e95845c43a6c9c0355411be"
 
 [[package]]
 name = "gratte"
-version = "1.2.0"
+version = "2.0.0"
 dependencies = [
  "gratte_macros",
  "phf",
@@ -154,7 +154,7 @@ dependencies = [
 
 [[package]]
 name = "gratte_macros"
-version = "1.2.0"
+version = "2.0.0"
 dependencies = [
  "gratte",
  "heck 0.5.0",
@@ -165,14 +165,14 @@ dependencies = [
 
 [[package]]
 name = "gratte_nostd_tests"
-version = "1.2.0"
+version = "2.0.0"
 dependencies = [
  "gratte",
 ]
 
 [[package]]
 name = "gratte_tests"
-version = "1.2.0"
+version = "2.0.0"
 dependencies = [
  "clap 4.5.60",
  "enum_variant_type",
