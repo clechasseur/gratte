@@ -31,7 +31,7 @@ jobs:
         id: auth
 
       - name: Publish package
-        uses: clechasseur/rs-cargo@2a8aa939121c79dd2b4305ed6bf83bc400ce1036 # v4.0.2
+        uses: clechasseur/rs-cargo@ecdb376d2e5ee2778c442a63becf72ccd673f2a5 # v5.0.1
         with:
           command: publish
         env:
