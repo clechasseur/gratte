@@ -31,6 +31,6 @@ quote = "1.0.45"
 syn = "2.0.117"
 
 # Dev dependencies:
-clap = "4.5.60"
+clap = "4.6.0"
 enum_variant_type = "=0.2.0"
 structopt = "0.3.26"
