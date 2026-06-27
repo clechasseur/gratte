@@ -58,8 +58,10 @@ pub fn from_repr_inner(ast: &DeriveInput) -> syn::Result<TokenStream> {
             Fields::Unit => quote! {},
             Fields::Unnamed(fields) => {
                 has_additional_data = true;
-                let defaults = ::core::iter::repeat(quote!(::core::default::Default::default()))
-                    .take(fields.unnamed.len());
+                let defaults = ::core::iter::repeat_n(
+                    quote!(::core::default::Default::default()),
+                    fields.unnamed.len(),
+                );
                 quote! { (#(#defaults),*) }
             }
             Fields::Named(fields) => {
