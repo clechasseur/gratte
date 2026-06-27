@@ -73,7 +73,7 @@ pub fn from_string_inner(ast: &DeriveInput) -> syn::Result<TokenStream> {
                     quote! { (#(#defaults),*) }
                 } else {
                     let defaults =
-                        ::core::iter::repeat(quote!(Default::default())).take(fields.unnamed.len());
+                        ::core::iter::repeat_n(quote!(Default::default()), fields.unnamed.len());
                     quote! { (#(#defaults),*) }
                 }
             }
