@@ -76,7 +76,7 @@ For instructions on filing bug reports or feature requests and contributing to t
 
 ## Minimum Rust version
 
-`gratte` currently builds on Rust 1.71.1 or newer.
+`gratte` currently builds on Rust 1.85.0 or newer.
 
 ## `gratte`?
 
