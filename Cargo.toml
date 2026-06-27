@@ -27,7 +27,7 @@ gratte_macros = { path = "strum_macros", version = "2.0.0" }
 heck = "0.5.0"
 phf = "0.13.1"
 proc-macro2 = "1.0.106"
-quote = "1.0.45"
+quote = "1.0.46"
 syn = "2.0.117"
 
 # Dev dependencies:
