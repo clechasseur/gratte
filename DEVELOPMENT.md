@@ -57,6 +57,17 @@ just test
 Any new feature or bug fix would need new tests to validate.
 Make sure all tests pass before submitting a PR.
 
+### Linting
+
+Before submitting a PR, make sure `rustfmt` and `clippy` are happy.
+To tidy up your code before committing, simply run
+
+```shell
+just tidy
+```
+
+Required checks will not pass if either of those report issues.
+
 ### Generating documentation
 
 To generate documentation locally, you can run
