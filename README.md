@@ -26,7 +26,7 @@ Add `gratte` to your dependencies:
 
 ```toml
 [dependencies]
-gratte = "2.0.0"
+gratte = "3.0.0"
 ```
 
 or by running:
