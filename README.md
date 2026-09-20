@@ -26,7 +26,7 @@ Add `gratte` to your dependencies:
 
 ```toml
 [dependencies]
-gratte = "3.0.0"
+gratte = "3.0.1"
 ```
 
 or by running:
@@ -62,7 +62,8 @@ To see the generated code, set the `STRUM_DEBUG` environment variable before com
 
 ## Differences from `strum`
 
-* The `derive` feature of the `gratte` crate is enabled by default.
+* The `derive` feature of the `gratte` crate is enabled by default
+* `gratte` uses version 3.x of `syn` (as of version 0.28.0, `strum` still uses `syn` 2.x)
 
 That's currently it - the rest of the `gratte`-specific work has been integrated back into `strum`.
 
