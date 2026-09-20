@@ -56,7 +56,7 @@
 //! [EnumTable]: https://docs.rs/gratte/latest/gratte/derive.EnumTable.html
 
 #![cfg_attr(not(feature = "std"), no_std)]
-#![cfg_attr(docsrs, feature(doc_cfg))]
+#![cfg_attr(gratte_docsrs, feature(doc_cfg))]
 #![cfg_attr(coverage_nightly, feature(coverage_attribute))]
 
 // only for documentation purposes
@@ -269,8 +269,8 @@ pub use gratte_macros::*;
 macro_rules! DocumentMacroRexports {
     ($($export:ident),+) => {
         $(
-            #[cfg(all(docsrs, feature = "derive"))]
-            #[cfg_attr(docsrs, doc(cfg(feature = "derive")))]
+            #[cfg(all(gratte_docsrs, feature = "derive"))]
+            #[cfg_attr(gratte_docsrs, doc(cfg(feature = "derive")))]
             pub use gratte_macros::$export;
         )+
     };
